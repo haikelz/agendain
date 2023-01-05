@@ -1,5 +1,4 @@
-import { atom, useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
@@ -9,10 +8,9 @@ const systemTheme: Theme =
   browser && matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
-const themeAtom = atom<Theme>(localValue || systemTheme);
 
 export const useDarkMode = () => {
-  const [darkMode, setDarkMode] = useAtom(themeAtom);
+  const [darkMode, setDarkMode] = useState<Theme>(localValue || systemTheme);
 
   useEffect(() => {
     if (!browser) return;

@@ -1,9 +1,9 @@
-import { Children } from "src/interfaces";
+import { ChildrenProps } from "../../types";
 
-const Layout = ({ children }: Children) => {
+const Layout = ({ children }: ChildrenProps) => {
   return (
-    <section className="flex justify-center items-center w-full min-h-screen dark:bg-gray-900">
-      <div className="flex justify-center items-center flex-col p-4 w-[85%]">
+    <section className="flex justify-center items-center max-w-full w-full min-h-screen dark:bg-gray-900">
+      <div className="flex justify-center items-center flex-col p-4 max-w-7xl w-full">
         {children}
       </div>
     </section>

@@ -4,10 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply outline-none dark:text-white font-montserrat;
-}
+@layer base {
+  * {
+    @apply outline-none dark:text-white font-montserrat;
+  }
 
-button {
-  @apply font-bold;
+  button {
+    @apply font-bold;
+  }
 }

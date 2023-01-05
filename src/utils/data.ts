@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export const initialTodos = [
   {
     id: "1",
@@ -24,7 +26,10 @@ export const initialFormData = {
   keterangan: "",
 };
 
-export const initialIsUpdate = {
-  id: null,
-  status: false,
-};
+export const initialArchiveData = [
+  {
+    id: nanoid(),
+    judul: "Contoh arsip",
+    keterangan: "Afkh luwh anime",
+  },
+];

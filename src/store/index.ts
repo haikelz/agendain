@@ -1,7 +1,12 @@
-import { atom } from "jotai";
-import { initialFormData, initialIsUpdate, initialTodos } from "../utils/data";
+import { configureStore } from "@reduxjs/toolkit";
+import todosSlice from "./slices/todos.slice";
+import archiveSlice from "./slices/archive.slice";
 
-export const todosAtom = atom(initialTodos);
-export const formDataAtom = atom(initialFormData);
-export const isUpdateAtom = atom(initialIsUpdate);
-export const searchTodoAtom = atom<string>("");
+const store = configureStore({
+  reducer: {
+    todos: todosSlice,
+    archive: archiveSlice,
+  },
+});
+
+export default store;

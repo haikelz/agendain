@@ -1,33 +1,44 @@
-import { Event } from "./interfaces";
-import { formDataAtom, isUpdateAtom, searchTodoAtom, todosAtom } from "./store";
-import { useAtom } from "jotai";
-import { FormEvent, useEffect } from "react";
 import { nanoid } from "nanoid";
+import { FormEvent, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ButtonSubmit } from "./components/buttonSubmit";
+import { DarkModeButton } from "./components/darkModeButton";
+import { Judul } from "./components/judul";
+import { Keterangan } from "./components/keterangan";
 import Layout from "./components/layout";
-import DarkModeButton from "./components/darkModeButton";
-import Judul from "./components/judul";
-import Keterangan from "./components/keterangan";
-import ButtonSubmit from "./components/buttonSubmit";
+import ListArchive from "./components/listArchive";
+import ListTodo from "./components/listTodos";
+import { Search } from "./components/search";
 import TidakAda from "./components/tidakAda";
-import ListTodo from "./components/listTodo";
-import Search from "./components/search";
+import { useFilter } from "./hooks/useFilter";
+import { addTodo } from "./store/slices/todos.slice";
+import { ListProps } from "./types";
+import { initialFormData } from "./utils/data";
 
 type IndexTargetValue = Record<string, string> & {
   judul: string;
   keterangan: string;
 };
 
-const App = () => {
-  const [todos, setTodos] = useAtom(todosAtom);
-  const [searchTodo, setSearchTodo] = useAtom(searchTodoAtom);
-  const [formData, setFormData] = useAtom(formDataAtom);
-  const [isUpdate, setIsUpdate] = useAtom(isUpdateAtom);
-
-  const saveTodos = <T,>(newTodos: T): void => {
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+type EventProps = {
+  target: {
+    value: string;
+    name: string;
   };
+  preventDefault: () => void;
+};
 
-  const handleChange = <T extends Event>(event: T): void => {
+const App = () => {
+  const [formData, setFormData] = useState(initialFormData);
+  const [search, setSearch] = useState("");
+
+  const dispatch = useDispatch();
+  const todos = useSelector((state: { todos: [ListProps] }) => state.todos);
+  const archive = useSelector(
+    (state: { archive: [ListProps] }) => state.archive
+  );
+
+  const handleChange = <T extends EventProps>(event: T) => {
     const data: IndexTargetValue = { ...formData };
     data[event.target.name] = event.target.value;
 
@@ -36,59 +47,39 @@ const App = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = [...todos];
 
-    if (isUpdate.status) {
-      data.forEach((item) => {
-        if (item.id === isUpdate.id) {
-          item.judul = formData.judul;
-          item.keterangan = formData.keterangan;
-        }
-      });
-    } else {
-      data.push({
+    dispatch(
+      addTodo({
         id: nanoid(),
         judul: formData.judul,
         keterangan: formData.keterangan,
-      });
-    }
-
-    setTodos(data);
-    setIsUpdate({ id: null, status: false });
+      })
+    );
     setFormData({ judul: "", keterangan: "" });
-    saveTodos(data);
   };
 
-  const handleEdit = (id: null) => {
-    const data = [...todos];
-    const foundData: any = data.find((item) => item.id === id);
+  const filteredTodos = useMemo(
+    () => useFilter(todos, search),
+    [todos, search]
+  );
 
-    setIsUpdate({ id: id, status: true });
-    setFormData({ judul: foundData.judul, keterangan: foundData.keterangan });
-    saveTodos(formData);
-  };
+  const filteredArchive = useMemo(
+    () => useFilter(archive, search),
+    [archive, search]
+  );
 
-  const handleDelete = (id: string) => {
-    const data = [...todos];
-    const filteredData = data.filter((item) => item.id !== id);
+  /*
+  TODO: edit feature
+  const handleEdit = (id: string, judul: string, keterangan: string) => {
+    const foundData = dispatch(
+      editTodo({ id: id, judul: judul, keterangan: keterangan })
+    );
 
-    setTodos(filteredData);
-    saveTodos(filteredData);
-  };
-
-  const filteredTodos = todos.filter((item) => {
-    if (item.judul === searchTodo) {
-      return item;
-    } else if (item.judul.toLowerCase().includes(searchTodo.toLowerCase())) {
-      return item;
-    }
-  });
-
-  useEffect(() => {
-    if (localStorage.getItem("todos")) {
-      setTodos(JSON.parse(localStorage.getItem("todos") || ""));
-    }
-  }, []);
+    setFormData({
+      judul: foundData.payload.judul,
+      keterangan: foundData.payload.keterangan,
+    });
+  };*/
 
   return (
     <Layout>
@@ -97,29 +88,51 @@ const App = () => {
         <DarkModeButton />
       </div>
       <p className="font-medium mt-1">Apa agendamu hari ini?</p>
-      <form className="my-6" onSubmit={(event) => handleSubmit(event)}>
+      <form className="my-6" onSubmit={handleSubmit}>
         <div className="flex w-full justify-center items-center flex-col gap-4">
           <Judul handleChange={handleChange} formData={formData} />
           <Keterangan handleChange={handleChange} formData={formData} />
           <ButtonSubmit />
         </div>
       </form>
-      <Search searchTodo={searchTodo} setSearchTodo={setSearchTodo} />
-      {todos ? (
-        filteredTodos.length ? (
+      <Search search={search} setSearch={setSearch} />
+      <div
+        className={`mt-6 flex flex-col justify-center ${
+          filteredTodos.length ? "" : "items-center"
+        } w-full`}
+      >
+        <h2 className="font-bold text-center text-2xl">Todos</h2>
+        {filteredTodos.length ? (
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
-            <ListTodo
-              todos={todos}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
+            {filteredTodos.map((todo, index) => (
+              <ListTodo
+                key={index + 1}
+                todo={todo}
+                dispatch={dispatch}
+                // handleEdit={handleEdit}
+              />
+            ))}
           </div>
         ) : (
           <TidakAda />
-        )
-      ) : (
-        <TidakAda />
-      )}
+        )}
+      </div>
+      <div
+        className={`mt-6 flex flex-col justify-center ${
+          filteredArchive.length ? "" : "items-center"
+        } w-full`}
+      >
+        <h2 className="font-bold text-center text-2xl">Archive</h2>
+        {filteredArchive.length ? (
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
+            {filteredArchive.map((arc, index) => (
+              <ListArchive key={index + 1} arc={arc} dispatch={dispatch} />
+            ))}
+          </div>
+        ) : (
+          <TidakAda />
+        )}
+      </div>
     </Layout>
   );
 };

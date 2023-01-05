@@ -1,14 +1,19 @@
-import { SearchTodo } from "src/interfaces";
+import { SetStateAction, memo } from "react";
 
-const Search = ({ searchTodo, setSearchTodo }: SearchTodo) => {
+type Search = {
+  search: string;
+  setSearch: (update: SetStateAction<string>) => void;
+};
+
+export const Search = ({ search, setSearch }: Search) => {
   return (
     <input
-      className="py-1 px-2 font-medium dark:bg-gray-700 border-[3px] border-blue-500 rounded-md"
+      className="py-1 px-2 font-medium dark:bg-gray-700 border-[3px] border-blue-500 rounded-md focus:ring-2 focus:ring-blue-500"
       placeholder="Cari Todo...."
-      value={searchTodo}
-      onChange={(event) => setSearchTodo(event.target.value)}
+      value={search}
+      onChange={(event) => setSearch(event.target.value)}
     />
   );
 };
 
-export default Search;
+memo(Search);
