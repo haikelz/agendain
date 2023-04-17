@@ -1,17 +1,16 @@
 import { nanoid } from "nanoid";
+import { AgendaProps } from "../types";
 
-export const initialTodos = [
+export const initialAgendas: AgendaProps[] = [
   {
     id: "1",
     judul: "Belajar",
-    keterangan:
-      "Belajar banyak hal, entah itu teknologi, kemampuan bertahan hidup, dan lainnya.",
+    keterangan: "Belajar banyak hal, entah itu teknologi, kemampuan bertahan hidup, dan lainnya.",
   },
   {
     id: "2",
     judul: "Istirahat",
-    keterangan:
-      "Namanya hidup, kadang bisa Javascript, kadang enggak. Kalau capek ya istirahat.",
+    keterangan: "Namanya hidup, kadang bisa Javascript, kadang enggak. Kalau capek ya istirahat.",
   },
   {
     id: "3",
@@ -26,7 +25,7 @@ export const initialFormData = {
   keterangan: "",
 };
 
-export const initialArchiveData = [
+export const initialArchiveData: AgendaProps[] = [
   {
     id: nanoid(),
     judul: "Contoh arsip",

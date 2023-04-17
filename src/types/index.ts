@@ -1,19 +1,42 @@
-import { ChangeEventHandler, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export type ChildrenProps = {
   children: ReactNode;
 };
 
-export type ListProps = {
-  id: string;
+type BaseProps = {
   judul: string;
   keterangan: string;
 };
 
-export type FormDataProps = {
-  formData: {
-    judul: string;
-    keterangan: string;
-  };
-  handleChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+export type AgendaProps = BaseProps & {
+  id: string;
+  date: string;
+};
+
+export type AgendaSliceProps = {
+  agenda: AgendaProps[];
+  setAgenda: (agenda: AgendaProps[]) => void;
+};
+
+export type ArchiveSliceProps = {
+  archive: AgendaProps[];
+  setArchive: (archive: AgendaProps[]) => void;
+};
+
+export type FormDataSliceProps = {
+  formData: FormDataProps;
+  setFormData: (formData: FormDataProps) => void;
+};
+
+export type FormDataProps = BaseProps;
+
+export type InputSliceProps = BaseProps & {
+  setJudul: (judul: string) => void;
+  setKeterangan: (keterangan: string) => void;
+};
+
+export type IndexTargetValueProps = Record<string, string> & {
+  name: string;
+  value: string;
 };
