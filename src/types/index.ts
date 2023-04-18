@@ -36,7 +36,20 @@ export type InputSliceProps = BaseProps & {
   setKeterangan: (keterangan: string) => void;
 };
 
+export type IsUpdateSliceProps = {
+  isUpdate: {
+    id: string;
+    status: boolean;
+  };
+  setIsUpdate: (isUpdate: { id: string; status: boolean }) => void;
+};
+
 export type IndexTargetValueProps = Record<string, string> & {
-  name: string;
-  value: string;
+  judul: string;
+  keterangan: string;
+};
+
+export type DoneAgendaSliceProps = {
+  isDone: boolean;
+  setIsDone: (isDone: boolean) => void;
 };

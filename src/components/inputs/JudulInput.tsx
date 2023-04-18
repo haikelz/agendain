@@ -1,8 +1,13 @@
 import clsx from "clsx";
+import { ChangeEvent } from "react";
 import useAgendaStore from "../../store";
 
-export const Judul = () => {
-  const { formData, setJudul, judul } = useAgendaStore();
+type JudulInputProps = {
+  handleChangeAgenda: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const Judul = ({ handleChangeAgenda }: JudulInputProps) => {
+  const formData = useAgendaStore((state) => state.formData);
 
   return (
     <div className="flex flex-col">
@@ -20,8 +25,8 @@ export const Judul = () => {
         )}
         placeholder="Ketik disini"
         name="judul"
-        value={judul}
-        onChange={(e) => setJudul(e.target.value)}
+        value={formData.judul}
+        onChange={handleChangeAgenda}
         required
       />
     </div>

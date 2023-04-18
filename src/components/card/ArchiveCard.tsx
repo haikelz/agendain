@@ -1,11 +1,11 @@
 import clsx from "clsx";
+import { HiArrowPath, HiTrash } from "react-icons/hi2";
 import useAgendaStore from "../../store";
 import { AgendaProps } from "../../types";
 import Button from "../Button";
 
-export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
-  const { id, judul, keterangan } = item;
-  const { agenda, archive, setArchive, setAgenda } = useAgendaStore();
+const ArchiveCard = ({ item }: { item: AgendaProps }) => {
+  const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
 
   const handleDeleteArchive = (id: string) => {
     const data = [...archive];
@@ -41,37 +41,35 @@ export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
         "dark:border-white"
       )}
     >
-      <div className="flex items-end justify-end space-x-3">
-        <div className="rounded-full bg-red-500 p-2"></div>
-        <div className="rounded-full bg-yellow-500 p-2"></div>
-        <div className="rounded-full bg-blue-500 p-2"></div>
+      <div className="flex w-full items-center justify-end">
+        <span className="font-semibold">{item.date}</span>
       </div>
-      <div className="mt-4">
-        <h1 className="text-2xl font-bold">{item.judul}</h1>
+      <div className="mt-2">
+        <span className="text-2xl font-bold">{item.judul}</span>
         <p className="my-3 font-medium">{item.keterangan}</p>
-        <div className="flex items-center justify-between">
-          <div className="items-center justify-center space-x-4">
-            <Button
-              variant="danger"
-              label="delete"
-              className="px-3 py-2"
-              onClick={() => handleDeleteArchive(item.id)}
-            >
-              Delete
-            </Button>
-
-            <Button
-              variant="primary"
-              label="archive"
-              className="px-3 py-2"
-              onClick={() => handleUndoArchive(item.id)}
-            >
-              Undo Archive
-            </Button>
-          </div>
-          <span className="font-semibold">{item.date}</span>
+        <div className="flex items-center justify-start space-x-4">
+          <Button
+            variant="danger"
+            label="delete"
+            className="flex items-center space-x-2 px-3 py-2"
+            onClick={() => handleDeleteArchive(item.id)}
+          >
+            <span>Delete</span>
+            <HiTrash size={22} />
+          </Button>
+          <Button
+            variant="primary"
+            label="archive"
+            className="flex items-center space-x-2 px-3 py-2"
+            onClick={() => handleUndoArchive(item.id)}
+          >
+            <span>Undo Archive</span>
+            <HiArrowPath size={22} />
+          </Button>
         </div>
       </div>
     </div>
   );
 };
+
+export default ArchiveCard;

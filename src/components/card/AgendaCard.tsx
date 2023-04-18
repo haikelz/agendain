@@ -1,11 +1,22 @@
 import clsx from "clsx";
-import { SyntheticEvent, memo } from "react";
+import { IconType } from "react-icons";
+import { HiArrowPath, HiBookmark, HiTrash } from "react-icons/hi2";
 import useAgendaStore from "../../store";
 import { AgendaProps } from "../../types";
 import Button from "../Button";
 
-export const AgendaCard = ({ item }: { item: AgendaProps }) => {
-  const { agenda, setAgenda, archive, setArchive, formData, setFormData } = useAgendaStore();
+type ButtonsListProps = {
+  id: number;
+  variant: "primary" | "secondary" | "danger";
+  label: "delete" | "edit" | "archive";
+  onClick: (id: string) => void;
+  icon: IconType;
+}[];
+
+const AgendaCard = ({ item }: { item: AgendaProps }) => {
+  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
+    (state) => state
+  );
 
   /**
    * Delete a agenda that user specify
@@ -15,13 +26,26 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
     const filteredData = data.filter((item) => item.id !== id);
 
     setAgenda(filteredData);
-    console.log(filteredData);
   };
 
   /**
-   * Archive a agenda that user specify
+   * Edit agenda based on id
    */
-  const handleArchive = (id: string) => {
+  const handleEditAgenda = (id: string) => {
+    const data = [...agenda];
+    const foundData = data.find((item) => item.id === id);
+
+    setIsUpdate({ id: id, status: true });
+    setFormData({
+      judul: foundData?.judul as string,
+      keterangan: foundData?.keterangan as string,
+    });
+  };
+
+  /**
+   * Archive an agenda that user specify
+   */
+  const handleArchiveAgenda = (id: string) => {
     const agendaData = [...agenda];
     const archiveData = [...archive];
 
@@ -38,11 +62,29 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
     setArchive(archiveData);
   };
 
-  const handleEditAgenda = (event: SyntheticEvent) => {
-    const data = { ...formData };
-    data[event.target.name] = event.target.value;
-    setFormData(data);
-  };
+  const buttonsList: ButtonsListProps = [
+    {
+      id: 1,
+      variant: "danger",
+      label: "delete",
+      onClick: (id: string) => handleDeleteAgenda(id),
+      icon: HiTrash,
+    },
+    {
+      id: 2,
+      variant: "secondary",
+      label: "edit",
+      onClick: (id: string) => handleEditAgenda(id),
+      icon: HiArrowPath,
+    },
+    {
+      id: 3,
+      variant: "primary",
+      label: "archive",
+      onClick: (id: string) => handleArchiveAgenda(id),
+      icon: HiBookmark,
+    },
+  ];
 
   return (
     <div
@@ -54,46 +96,50 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
         "dark:border-white"
       )}
     >
-      <div className="flex items-end justify-end space-x-3">
-        <div className="rounded-full bg-red-500 p-2"></div>
-        <div className="rounded-full bg-yellow-500 p-2"></div>
-        <div className="rounded-full bg-blue-500 p-2"></div>
+      <div className="flex w-full items-center justify-end space-x-2">
+        <span className="font-semibold">{item.date}</span>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            className={clsx(
+              "h-4 w-4 cursor-pointer rounded",
+              "border-gray-300 bg-gray-100 text-blue-600",
+              "focus:ring-2 focus:ring-blue-500",
+              "dark:border-gray-600 dark:bg-gray-700",
+              "dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+            )}
+          />
+        </div>
       </div>
-      <div className="mt-4">
-        <h1 className="text-2xl font-bold">{item.judul}</h1>
+      <div className="mt-2">
+        <span className="text-2xl font-bold">{item.judul}</span>
         <p className="my-3 font-medium">{item.keterangan}</p>
-        <div className="flex items-center justify-between">
-          <div className="items-center justify-center space-x-4">
-            <Button
-              variant="danger"
-              label="delete"
-              className="px-3 py-2"
-              onClick={() => handleDeleteAgenda(item.id)}
-            >
-              Delete
-            </Button>
-            <Button
-              variant="secondary"
-              className="px-3 py-2"
-              label="Edit agenda"
-              onClick={handleEditAgenda}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="primary"
-              label="archive"
-              className="px-3 py-2"
-              onClick={() => handleArchive(item.id)}
-            >
-              Archive
-            </Button>
-          </div>
-          <span className="font-semibold">{item.date}</span>
+        <div className="flex items-center justify-start space-x-4">
+          {buttonsList.map((button) => {
+            const Icon: IconType = button.icon;
+            return (
+              <Button
+                key={button.id}
+                variant={button.variant}
+                label={button.label}
+                className="flex items-center space-x-2 px-3 py-2"
+                onClick={() =>
+                  button.label === "delete"
+                    ? handleDeleteAgenda(item.id)
+                    : button.label === "edit"
+                    ? handleEditAgenda(item.id)
+                    : handleArchiveAgenda(item.id)
+                }
+              >
+                <span className="capitalize">{button.label}</span>
+                <Icon size={22} />
+              </Button>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 };
 
-memo(AgendaCard);
+export default AgendaCard;

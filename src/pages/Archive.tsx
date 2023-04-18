@@ -1,10 +1,11 @@
 import clsx from "clsx";
-import { useMemo, useState } from "react";
+import { lazy, useMemo, useState } from "react";
 import Layout from "../components/Layout";
 import TidakAda from "../components/TidakAda";
-import { ArchiveCard } from "../components/card";
 import { Search } from "../components/inputs";
 import useAgendaStore from "../store";
+
+const ArchiveCard = lazy(() => import("../components/card/ArchiveCard"));
 
 const Archive = () => {
   document.title = "Archive";

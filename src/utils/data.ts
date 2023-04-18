@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid";
+/*import { nanoid } from "nanoid";
 import { AgendaProps } from "../types";
 
 export const initialAgendas: AgendaProps[] = [
@@ -32,3 +32,4 @@ export const initialArchiveData: AgendaProps[] = [
     keterangan: "Afkh luwh anime",
   },
 ];
+*/ export {};

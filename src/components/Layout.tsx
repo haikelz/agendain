@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { ChildrenProps } from "../types";
+import { Suspense } from "react";
 
 const Layout = ({ children }: ChildrenProps) => {
   return (

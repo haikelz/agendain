@@ -1,8 +1,13 @@
 import clsx from "clsx";
+import { ChangeEvent } from "react";
 import useAgendaStore from "../store";
 
-export const Keterangan = () => {
-  const { formData, keterangan, setKeterangan } = useAgendaStore();
+type KeteranganTextAreaProps = {
+  handleChangeAgenda: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+};
+
+export const Keterangan = ({ handleChangeAgenda }: KeteranganTextAreaProps) => {
+  const formData = useAgendaStore((state) => state.formData);
 
   return (
     <div className="flex flex-col">
@@ -19,8 +24,8 @@ export const Keterangan = () => {
         )}
         placeholder="Ketik disini"
         name="keterangan"
-        value={keterangan}
-        onChange={(e) => setKeterangan(e.target.value)}
+        value={formData.keterangan}
+        onChange={handleChangeAgenda}
         required
       />
     </div>
