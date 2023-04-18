@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { InputSliceProps } from "../../types";
+import { InputSliceProps } from "~/types";
 
 const inputSlice: StateCreator<InputSliceProps, [], [], InputSliceProps> = (set) => ({
   judul: "",

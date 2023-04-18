@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { IsUpdateSliceProps } from "../../types";
+import { IsUpdateSliceProps } from "~/types";
 
 const isUpdateSlice: StateCreator<IsUpdateSliceProps, [], [], IsUpdateSliceProps> = (set) => ({
   isUpdate: {

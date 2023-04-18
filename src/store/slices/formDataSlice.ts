@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { FormDataSliceProps } from "../../types";
+import { FormDataSliceProps } from "~/types";
 
 const formDataSlice: StateCreator<FormDataSliceProps, [], [], FormDataSliceProps> = (set) => ({
   formData: {

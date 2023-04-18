@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import { ChildrenProps } from "../types";
 import { HTMLAttributes } from "react";
+import { ChildrenProps } from "~/types";
 
 type ButtonProps = ChildrenProps & {
   variant: "primary" | "secondary" | "danger";

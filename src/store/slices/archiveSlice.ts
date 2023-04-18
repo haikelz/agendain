@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { AgendaProps } from "../../types";
+import { AgendaProps } from "~/types";
 
 type ArchiveSliceProps = {
   archive: AgendaProps[];

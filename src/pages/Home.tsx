@@ -1,25 +1,26 @@
 import clsx from "clsx";
 import { nanoid } from "nanoid";
-import { ChangeEvent, FormEvent, lazy, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useMemo, useState } from "react";
 import { HiArrowPath, HiArrowTopRightOnSquare, HiMoon, HiPlus, HiSun } from "react-icons/hi2";
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
-import { Keterangan } from "../components/KeteranganTextArea";
-import Layout from "../components/Layout";
-import TidakAda from "../components/TidakAda";
-import { Judul, Search } from "../components/inputs";
-import { useDarkMode } from "../hooks/useDarkMode";
-import { getDate } from "../lib/helpers/getDate";
-import useAgendaStore from "../store";
-import { IndexTargetValueProps } from "../types";
-
-const AgendaCard = lazy(() => import("../components/card/AgendaCard"));
+import Button from "~/components/Button";
+import { Keterangan } from "~/components/KeteranganTextArea";
+import Layout from "~/components/Layout";
+import TidakAda from "~/components/TidakAda";
+import { AgendaCard } from "~/components/cards";
+import { Judul, Search } from "~/components/inputs";
+import { useDarkMode } from "~/hooks/useDarkMode";
+import { getDate } from "~/lib/helpers/getDate";
+import useAgendaStore from "~/store";
+import { IndexTargetValueProps } from "~/types";
 
 const Home = () => {
   const [darkMode, setDarkMode] = useDarkMode();
   const [search, setSearch] = useState<string>("");
 
-  const { agenda, setAgenda, formData, setFormData, isUpdate, setIsUpdate } = useAgendaStore();
+  const { agenda, setAgenda, formData, setFormData, isUpdate, setIsUpdate } = useAgendaStore(
+    (state) => state
+  );
 
   const handleChangeAgenda = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const data: IndexTargetValueProps = { ...formData };
@@ -55,11 +56,11 @@ const Home = () => {
 
   const filteredAgendas = useMemo(
     () =>
-      agenda.filter((value) => {
-        if (value.judul === search) {
-          return value;
-        } else if (value.judul?.toLowerCase().includes(search.toLowerCase())) {
-          return value;
+      agenda.filter((item) => {
+        if (item.judul === search) {
+          return item;
+        } else if (item.judul?.toLowerCase().includes(search.toLowerCase())) {
+          return item;
         }
       }),
     [search, agenda]

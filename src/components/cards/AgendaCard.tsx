@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import { IconType } from "react-icons";
 import { HiArrowPath, HiBookmark, HiTrash } from "react-icons/hi2";
-import useAgendaStore from "../../store";
-import { AgendaProps } from "../../types";
-import Button from "../Button";
+import Button from "~/components/Button";
+import useAgendaStore from "~/store";
+import { AgendaProps } from "~/types";
 
 type ButtonsListProps = {
   id: number;
@@ -13,7 +13,7 @@ type ButtonsListProps = {
   icon: IconType;
 }[];
 
-const AgendaCard = ({ item }: { item: AgendaProps }) => {
+export const AgendaCard = ({ item }: { item: AgendaProps }) => {
   const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
     (state) => state
   );
@@ -141,5 +141,3 @@ const AgendaCard = ({ item }: { item: AgendaProps }) => {
     </div>
   );
 };
-
-export default AgendaCard;

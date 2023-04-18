@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ChangeEvent } from "react";
-import useAgendaStore from "../store";
+import useAgendaStore from "~/store";
 
 type KeteranganTextAreaProps = {
   handleChangeAgenda: (event: ChangeEvent<HTMLTextAreaElement>) => void;

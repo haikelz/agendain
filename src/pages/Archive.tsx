@@ -1,17 +1,16 @@
 import clsx from "clsx";
-import { lazy, useMemo, useState } from "react";
-import Layout from "../components/Layout";
-import TidakAda from "../components/TidakAda";
-import { Search } from "../components/inputs";
-import useAgendaStore from "../store";
-
-const ArchiveCard = lazy(() => import("../components/card/ArchiveCard"));
+import { useMemo, useState } from "react";
+import Layout from "~/components/Layout";
+import TidakAda from "~/components/TidakAda";
+import { ArchiveCard } from "~/components/cards";
+import { Search } from "~/components/inputs";
+import useAgendaStore from "~/store";
 
 const Archive = () => {
   document.title = "Archive";
 
   const [search, setSearch] = useState<string>("");
-  const { archive } = useAgendaStore();
+  const archive = useAgendaStore((state) => state.archive);
 
   const filteredArchive = useMemo(
     () =>

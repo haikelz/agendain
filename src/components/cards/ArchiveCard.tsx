@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { HiArrowPath, HiTrash } from "react-icons/hi2";
-import useAgendaStore from "../../store";
-import { AgendaProps } from "../../types";
-import Button from "../Button";
+import Button from "~/components/Button";
+import useAgendaStore from "~/store";
+import { AgendaProps } from "~/types";
 
-const ArchiveCard = ({ item }: { item: AgendaProps }) => {
+export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
   const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
 
   const handleDeleteArchive = (id: string) => {
@@ -71,5 +71,3 @@ const ArchiveCard = ({ item }: { item: AgendaProps }) => {
     </div>
   );
 };
-
-export default ArchiveCard;

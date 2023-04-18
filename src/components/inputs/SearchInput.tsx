@@ -13,7 +13,7 @@ export const Search = ({ search, setSearch }: SearchProps) => {
       <input
         type="search"
         className={clsx(
-          "relative w-96 bg-gray-50 py-1.5 px-2 pl-12 font-medium",
+          "relative w-96 bg-gray-50 px-2 py-1.5 pl-12 font-medium",
           "rounded-md border border-gray-300",
           "transition-all ease-in-out",
           "focus:ring-2 focus:ring-blue-500",
