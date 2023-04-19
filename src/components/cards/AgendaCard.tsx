@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { IconType } from "react-icons";
 import { HiArrowPath, HiBookmark, HiTrash } from "react-icons/hi2";
 import Button from "~/components/Button";
@@ -9,13 +10,13 @@ type ButtonsListProps = {
   id: number;
   variant: "primary" | "secondary" | "danger";
   label: "delete" | "edit" | "archive";
-  onClick: (id: string) => void;
   icon: IconType;
 }[];
 
 export const AgendaCard = ({ item }: { item: AgendaProps }) => {
-  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate, isDone, setIsDone } =
-    useAgendaStore((state) => state);
+  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
+    (state) => state
+  );
 
   const handleDeleteAgenda = (id: string) => {
     const data = [...agenda];
@@ -48,6 +49,7 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
       judul: foundAgenda?.judul as string,
       keterangan: foundAgenda?.keterangan as string,
       date: foundAgenda?.date as string,
+      isDone: foundAgenda?.isDone as boolean,
     });
     setArchive(archiveData);
   };
@@ -57,21 +59,18 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
       id: 1,
       variant: "danger",
       label: "delete",
-      onClick: (id: string) => handleDeleteAgenda(id),
       icon: HiTrash,
     },
     {
       id: 2,
       variant: "secondary",
       label: "edit",
-      onClick: (id: string) => handleEditAgenda(id),
       icon: HiArrowPath,
     },
     {
       id: 3,
       variant: "primary",
       label: "archive",
-      onClick: (id: string) => handleArchiveAgenda(id),
       icon: HiBookmark,
     },
   ];
@@ -90,6 +89,7 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
         <span className="font-semibold">{item.date}</span>
         <div className="flex items-center">
           <input
+            name={item.judul}
             type="checkbox"
             className={cx(
               "h-4 w-4 cursor-pointer rounded",
@@ -98,8 +98,16 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
               "dark:border-gray-600 dark:bg-gray-700",
               "dark:ring-offset-gray-800 dark:focus:ring-blue-600"
             )}
-            onChange={(event) => setIsDone(event.target.checked)}
-            checked={isDone}
+            onChange={(event) =>
+              setAgenda(
+                agenda.map((value) =>
+                  value.judul === event.target.name
+                    ? { ...value, isDone: event.target.checked }
+                    : value
+                )
+              )
+            }
+            checked={item.isDone}
           />
         </div>
       </div>

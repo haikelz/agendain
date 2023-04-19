@@ -39,7 +39,7 @@ const Archive = () => {
             )}
           >
             {filteredArchive.map((item) => (
-              <ArchiveCard item={item} />
+              <ArchiveCard key={item.id} item={item} />
             ))}
           </div>
         ) : (

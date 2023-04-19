@@ -12,6 +12,7 @@ type BaseProps = {
 export type AgendaProps = BaseProps & {
   id: string;
   date: string;
+  isDone: boolean;
 };
 
 export type AgendaSliceProps = {

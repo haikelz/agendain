@@ -5,7 +5,7 @@ import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
 export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
-  const { agenda, archive, setArchive, setAgenda, isDone } = useAgendaStore((state) => state);
+  const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
 
   const handleDeleteArchive = (id: string) => {
     const data = [...archive];
@@ -27,6 +27,7 @@ export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
       judul: foundArchive?.judul as string,
       keterangan: foundArchive?.keterangan as string,
       date: foundArchive?.date as string,
+      isDone: foundArchive?.isDone as boolean,
     });
     setAgenda(agendaData);
   };
@@ -52,7 +53,7 @@ export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
             "dark:border-gray-600 dark:bg-gray-700",
             "dark:ring-offset-gray-800 dark:focus:ring-blue-600"
           )}
-          checked={isDone}
+          checked={item.isDone}
           readOnly
         />
       </div>

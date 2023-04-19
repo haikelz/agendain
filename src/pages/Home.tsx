@@ -48,6 +48,7 @@ const Home = () => {
         judul: formData.judul,
         keterangan: formData.keterangan,
         date: getDate(),
+        isDone: false,
       });
     }
 
