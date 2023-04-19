@@ -1,11 +1,11 @@
-import clsx from "clsx";
 import { HiArrowPath, HiTrash } from "react-icons/hi2";
 import Button from "~/components/Button";
+import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
 export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
-  const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
+  const { agenda, archive, setArchive, setAgenda, isDone } = useAgendaStore((state) => state);
 
   const handleDeleteArchive = (id: string) => {
     const data = [...archive];
@@ -33,7 +33,7 @@ export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
 
   return (
     <div
-      className={clsx(
+      className={cx(
         "flex cursor-pointer flex-col justify-start shadow-sm",
         "rounded-md border border-gray-300 p-3",
         "transition-all ease-in-out",
@@ -41,8 +41,20 @@ export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
         "dark:border-white"
       )}
     >
-      <div className="flex w-full items-center justify-end">
+      <div className="flex w-full items-center justify-end space-x-2">
         <span className="font-semibold">{item.date}</span>
+        <input
+          type="checkbox"
+          className={cx(
+            "h-4 w-4 cursor-pointer rounded",
+            "border-gray-300 bg-gray-100 text-blue-600",
+            "focus:ring-2 focus:ring-blue-500",
+            "dark:border-gray-600 dark:bg-gray-700",
+            "dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+          )}
+          checked={isDone}
+          readOnly
+        />
       </div>
       <div className="mt-2">
         <span className="text-2xl font-bold">{item.judul}</span>

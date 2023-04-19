@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { HTMLAttributes } from "react";
+import { cx } from "~/lib/helpers/cx";
 import { ChildrenProps } from "~/types";
 
 type ButtonProps = ChildrenProps & {
@@ -13,7 +13,7 @@ const Button = ({ children, variant, className, label, onClick }: ButtonProps) =
     <button
       type="button"
       aria-label={label}
-      className={clsx(
+      className={cx(
         "rounded-md text-white shadow-lg transition-all ease-in-out",
         variant === "primary"
           ? "bg-blue-500 hover:bg-blue-600"

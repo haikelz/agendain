@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { ChangeEvent } from "react";
+import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 
 type KeteranganTextAreaProps = {
@@ -15,7 +15,7 @@ export const Keterangan = ({ handleChangeAgenda }: KeteranganTextAreaProps) => {
         Keterangan
       </label>
       <textarea
-        className={clsx(
+        className={cx(
           "mt-2 w-96 p-2 font-medium",
           "h-32 focus:ring-2 focus:ring-blue-500",
           "border border-gray-300 dark:border-gray-500",

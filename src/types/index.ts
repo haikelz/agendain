@@ -53,3 +53,8 @@ export type DoneAgendaSliceProps = {
   isDone: boolean;
   setIsDone: (isDone: boolean) => void;
 };
+
+export type IsDoneSliceProps = {
+  isDone: boolean;
+  setIsDone: (isDone: boolean) => void;
+};

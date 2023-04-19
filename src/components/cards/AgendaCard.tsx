@@ -1,7 +1,7 @@
-import clsx from "clsx";
 import { IconType } from "react-icons";
 import { HiArrowPath, HiBookmark, HiTrash } from "react-icons/hi2";
 import Button from "~/components/Button";
+import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
@@ -14,13 +14,9 @@ type ButtonsListProps = {
 }[];
 
 export const AgendaCard = ({ item }: { item: AgendaProps }) => {
-  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
-    (state) => state
-  );
+  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate, isDone, setIsDone } =
+    useAgendaStore((state) => state);
 
-  /**
-   * Delete a agenda that user specify
-   */
   const handleDeleteAgenda = (id: string) => {
     const data = [...agenda];
     const filteredData = data.filter((item) => item.id !== id);
@@ -28,9 +24,6 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
     setAgenda(filteredData);
   };
 
-  /**
-   * Edit agenda based on id
-   */
   const handleEditAgenda = (id: string) => {
     const data = [...agenda];
     const foundData = data.find((item) => item.id === id);
@@ -42,9 +35,6 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
     });
   };
 
-  /**
-   * Archive an agenda that user specify
-   */
   const handleArchiveAgenda = (id: string) => {
     const agendaData = [...agenda];
     const archiveData = [...archive];
@@ -88,7 +78,7 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
 
   return (
     <div
-      className={clsx(
+      className={cx(
         "flex cursor-pointer flex-col justify-start shadow-sm",
         "rounded-md border border-gray-300 p-3",
         "transition-all ease-in-out",
@@ -101,13 +91,15 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
         <div className="flex items-center">
           <input
             type="checkbox"
-            className={clsx(
+            className={cx(
               "h-4 w-4 cursor-pointer rounded",
               "border-gray-300 bg-gray-100 text-blue-600",
               "focus:ring-2 focus:ring-blue-500",
               "dark:border-gray-600 dark:bg-gray-700",
               "dark:ring-offset-gray-800 dark:focus:ring-blue-600"
             )}
+            onChange={(event) => setIsDone(event.target.checked)}
+            checked={isDone}
           />
         </div>
       </div>

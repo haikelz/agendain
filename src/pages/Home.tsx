@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { nanoid } from "nanoid";
 import { ChangeEvent, FormEvent, useMemo, useState } from "react";
 import { HiArrowPath, HiArrowTopRightOnSquare, HiMoon, HiPlus, HiSun } from "react-icons/hi2";
@@ -10,6 +9,7 @@ import TidakAda from "~/components/TidakAda";
 import { AgendaCard } from "~/components/cards";
 import { Judul, Search } from "~/components/inputs";
 import { useDarkMode } from "~/hooks/useDarkMode";
+import { cx } from "~/lib/helpers/cx";
 import { getDate } from "~/lib/helpers/getDate";
 import useAgendaStore from "~/store";
 import { IndexTargetValueProps } from "~/types";
@@ -22,7 +22,9 @@ const Home = () => {
     (state) => state
   );
 
-  const handleChangeAgenda = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangeAgenda = <T extends ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>(
+    event: T
+  ) => {
     const data: IndexTargetValueProps = { ...formData };
     data[event.target.name] = event.target.value;
 
@@ -54,7 +56,7 @@ const Home = () => {
     setFormData({ judul: "", keterangan: "" });
   };
 
-  const filteredAgendas = useMemo(
+  const filteredAgenda = useMemo(
     () =>
       agenda.filter((item) => {
         if (item.judul === search) {
@@ -79,14 +81,14 @@ const Home = () => {
           {darkMode === "dark" ? <HiSun size={25} /> : <HiMoon size={25} />}
         </button>
       </div>
-      <p className="mt-1 font-medium">Apa agendamu hari ini?</p>
+      <p className="mt-2 font-medium">Apa agendamu hari ini?</p>
       <form className="my-6" onSubmit={handleSubmit}>
         <div className="flex w-full flex-col items-center justify-center gap-4">
           <Judul handleChangeAgenda={handleChangeAgenda} />
           <Keterangan handleChangeAgenda={handleChangeAgenda} />
           <div className="flex items-center justify-center space-x-3">
             <button
-              className={clsx(
+              className={cx(
                 "flex items-center justify-center",
                 "space-x-2 rounded-md",
                 "bg-blue-500 text-white",
@@ -112,7 +114,7 @@ const Home = () => {
               <Button
                 variant="secondary"
                 label="Go to Archive"
-                className={clsx("flex items-center justify-center", "space-x-2 px-3 py-2")}
+                className={cx("flex items-center justify-center", "space-x-2 px-3 py-2")}
               >
                 <span>Go to Archive</span>
                 <HiArrowTopRightOnSquare />
@@ -123,21 +125,17 @@ const Home = () => {
       </form>
       <Search search={search} setSearch={setSearch} />
       <div
-        className={clsx(
+        className={cx(
           "flex w-full flex-col justify-center",
-          filteredAgendas.length ? "" : "items-center"
+          filteredAgenda.length ? "" : "items-center"
         )}
       >
         <h2 className="my-6 text-center text-3xl font-bold">List Agenda</h2>
-        {filteredAgendas.length ? (
+        {filteredAgenda.length ? (
           <div
-            className={clsx(
-              "grid grid-cols-1 grid-rows-1 gap-4",
-              "sm:grid-cols-2",
-              "md:grid-cols-3"
-            )}
+            className={cx("grid grid-cols-1 grid-rows-1 gap-4", "sm:grid-cols-2", "md:grid-cols-3")}
           >
-            {filteredAgendas.map((item, index) => (
+            {filteredAgenda.map((item, index) => (
               <AgendaCard key={index + 1} item={item} />
             ))}
           </div>

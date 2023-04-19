@@ -1,9 +1,9 @@
-import clsx from "clsx";
 import { useMemo, useState } from "react";
 import Layout from "~/components/Layout";
 import TidakAda from "~/components/TidakAda";
 import { ArchiveCard } from "~/components/cards";
 import { Search } from "~/components/inputs";
+import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 
 const Archive = () => {
@@ -32,7 +32,7 @@ const Archive = () => {
         <h2 className="text-center text-2xl font-bold">List archive</h2>
         {filteredArchive.length ? (
           <div
-            className={clsx(
+            className={cx(
               "mt-6 grid grid-cols-1 grid-rows-1 gap-4",
               "sm:grid-cols-2",
               "md:grid-cols-3"

@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { cx } from "~/lib/helpers/cx";
 import { ChangeEvent } from "react";
 import useAgendaStore from "~/store";
 
@@ -16,7 +16,7 @@ export const Judul = ({ handleChangeAgenda }: JudulInputProps) => {
       </label>
       <input
         type="text"
-        className={clsx(
+        className={cx(
           "mt-2 w-96 p-2 font-medium",
           "rounded-md border border-gray-300 bg-gray-50",
           "transition-all ease-in-out",

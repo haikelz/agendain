@@ -6,7 +6,7 @@
 
 @layer base {
   * {
-    @apply outline-none dark:text-white font-inter;
+    @apply font-inter tracking-wide outline-none dark:text-white;
   }
 
   button {

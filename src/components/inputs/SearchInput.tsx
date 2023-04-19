@@ -1,6 +1,6 @@
-import clsx from "clsx";
 import { SetStateAction } from "react";
 import { MdSearch } from "react-icons/md";
+import { cx } from "~/lib/helpers/cx";
 
 type SearchProps = {
   search: string;
@@ -12,7 +12,7 @@ export const Search = ({ search, setSearch }: SearchProps) => {
     <div className="relative flex items-center justify-center">
       <input
         type="search"
-        className={clsx(
+        className={cx(
           "relative w-96 bg-gray-50 px-2 py-1.5 pl-12 font-medium",
           "rounded-md border border-gray-300",
           "transition-all ease-in-out",
