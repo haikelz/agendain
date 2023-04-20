@@ -18,12 +18,13 @@ const Button = ({ children, variant, className, label, onClick }: ButtonProps) =
         "flex items-center justify-center space-x-2 text-white shadow-lg",
         "text-base",
         "transition-all ease-in-out",
+        "focus:outline-none focus:ring-4",
         variant === "primary"
-          ? "bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
+          ? "bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:focus:ring-blue-800"
           : variant === "secondary"
-          ? "bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-4 focus:ring-teal-300 dark:focus:ring-teal-800"
+          ? "bg-teal-500 hover:bg-teal-600 focus:ring-teal-300 dark:focus:ring-teal-800"
           : variant === "danger"
-          ? "bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800"
+          ? "bg-red-500 hover:bg-red-600 focus:ring-red-300 dark:focus:ring-red-800"
           : "",
         className
       )}

@@ -49,11 +49,9 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
   return (
     <div
       className={cx(
-        "flex cursor-pointer flex-col justify-start shadow-sm",
+        "flex flex-col justify-start shadow-sm",
         "rounded-md border border-gray-300 p-3",
-        "transition-all ease-in-out",
-        "hover:scale-105",
-        "dark:border-white"
+        "dark:border-gray-500 dark:bg-gray-800"
       )}
     >
       <div className="flex w-full items-center justify-end space-x-2">
@@ -64,10 +62,10 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
             type="checkbox"
             className={cx(
               "h-4 w-4 cursor-pointer rounded",
-              "border-gray-300 bg-gray-100 text-blue-600",
-              "focus:ring-2 focus:ring-blue-500",
+              "border-gray-300 bg-gray-100 text-blue-700",
+              "focus:ring-2 focus:ring-blue-600",
               "dark:border-gray-600 dark:bg-gray-700",
-              "dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+              "dark:ring-offset-gray-800 dark:focus:ring-blue-700"
             )}
             onChange={(event) =>
               setAgenda(
@@ -85,7 +83,7 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
       <div className="mt-2">
         <h3 className={cx("text-2xl font-bold", item.isDone ? "line-through" : "")}>
           {reactStringReplace(item.judul, search, (match: string, index: number) => (
-            <span className="bg-yellow-600" key={index + 1}>
+            <span className="bg-yellow-300" key={index + 1}>
               {match}
             </span>
           ))}

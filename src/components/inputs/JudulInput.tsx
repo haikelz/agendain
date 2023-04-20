@@ -20,10 +20,10 @@ export function JudulInput({ handleChangeAgenda }: JudulInputProps) {
           "mt-2 p-2 font-medium",
           "rounded-md border border-gray-300 bg-gray-50",
           "transition-all ease-in-out",
-          "focus:ring-2 focus:ring-blue-500",
+          "focus:ring-2 focus:ring-blue-600",
           "dark:border-gray-500 dark:bg-gray-800"
         )}
-        placeholder="Ketik disini"
+        placeholder="Ketik disini...."
         name="judul"
         value={formData.judul}
         onChange={handleChangeAgenda}

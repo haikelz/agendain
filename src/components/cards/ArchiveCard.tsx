@@ -1,11 +1,12 @@
 import { HiArrowPath, HiTrash } from "react-icons/hi2";
+import reactStringReplace from "react-string-replace";
 import Button from "~/components/Button";
 import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
 export function ArchiveCard({ item }: { item: AgendaProps }) {
-  const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
+  const { agenda, archive, setArchive, setAgenda, search } = useAgendaStore((state) => state);
 
   function handleDeleteArchive(id: string) {
     const data = [...archive];
@@ -35,11 +36,9 @@ export function ArchiveCard({ item }: { item: AgendaProps }) {
   return (
     <div
       className={cx(
-        "flex cursor-pointer flex-col justify-start shadow-sm",
+        "flex flex-col justify-start shadow-sm",
         "rounded-md border border-gray-300 p-3",
-        "transition-all ease-in-out",
-        "hover:scale-105",
-        "dark:border-white"
+        "dark:border-gray-500 dark:bg-gray-800"
       )}
     >
       <div className="flex w-full items-center justify-end space-x-2">
@@ -48,18 +47,26 @@ export function ArchiveCard({ item }: { item: AgendaProps }) {
           type="checkbox"
           className={cx(
             "h-4 w-4 cursor-pointer rounded",
-            "border-gray-300 bg-gray-100 text-blue-600",
-            "focus:ring-2 focus:ring-blue-500",
+            "border-gray-300 bg-gray-100 text-blue-700",
+            "focus:ring-2 focus:ring-blue-600",
             "dark:border-gray-600 dark:bg-gray-700",
-            "dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+            "dark:ring-offset-gray-800 dark:focus:ring-blue-700"
           )}
           checked={item.isDone}
           readOnly
         />
       </div>
       <div className="mt-2">
-        <span className="text-2xl font-bold">{item.judul}</span>
-        <p className="my-3 font-medium">{item.keterangan}</p>
+        <h3 className={cx("text-2xl font-bold", item.isDone ? "line-through" : "")}>
+          {reactStringReplace(item.judul, search, (match: string, index: number) => (
+            <span className="bg-yellow-300" key={index + 1}>
+              {match}
+            </span>
+          ))}
+        </h3>
+        <p className={cx("my-3 font-medium", item.isDone ? "line-through" : "")}>
+          {item.keterangan}
+        </p>
         <div className="flex items-center justify-start space-x-4">
           <Button
             variant="danger"

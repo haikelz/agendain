@@ -43,7 +43,7 @@ export default function Home() {
         id: nanoid(),
         judul: formData.judul,
         keterangan: formData.keterangan,
-        date: format(new Date(), "dd llll yyyy", { locale: id }),
+        date: format(new Date(), "dd LLLL yyyy", { locale: id }),
         isDone: false,
       });
     }
@@ -79,8 +79,8 @@ export default function Home() {
               aria-label="submit"
               className={cx(
                 "flex items-center space-x-2 px-3 py-2",
-                "rounded-md bg-blue-500 text-white",
-                "hover:bg-blue-600",
+                "rounded-md bg-blue-600 text-white",
+                "hover:bg-blue-700",
                 "focus:outline-none focus:ring-4 focus:ring-blue-300",
                 "dark:focus:ring-blue-800"
               )}
