@@ -7,7 +7,7 @@ const localValue = (browser ? localStorage.getItem("theme") : "light") as Theme;
 const systemTheme: Theme =
   browser && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
-export const useDarkMode = () => {
+export function useDarkMode() {
   const [darkMode, setDarkMode] = useState<Theme>(localValue || systemTheme);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ export const useDarkMode = () => {
   }, [darkMode]);
 
   return [darkMode, setDarkMode] as const;
-};
+}

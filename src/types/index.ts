@@ -32,11 +32,6 @@ export type FormDataSliceProps = {
 
 export type FormDataProps = BaseProps;
 
-export type InputSliceProps = BaseProps & {
-  setJudul: (judul: string) => void;
-  setKeterangan: (keterangan: string) => void;
-};
-
 export type IsUpdateSliceProps = {
   isUpdate: {
     id: string;
@@ -50,12 +45,12 @@ export type IndexTargetValueProps = Record<string, string> & {
   keterangan: string;
 };
 
-export type DoneAgendaSliceProps = {
+export type IsDoneSliceProps = {
   isDone: boolean;
   setIsDone: (isDone: boolean) => void;
 };
 
-export type IsDoneSliceProps = {
-  isDone: boolean;
-  setIsDone: (isDone: boolean) => void;
+export type SearchSliceProps = {
+  search: string;
+  setSearch: (search: string) => void;
 };

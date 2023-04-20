@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        chivo: ["Chivo Mono", "sans-serif"],
       },
     },
   },

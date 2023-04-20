@@ -1,19 +1,16 @@
-import { SetStateAction } from "react";
 import { MdSearch } from "react-icons/md";
 import { cx } from "~/lib/helpers/cx";
+import useAgendaStore from "~/store";
 
-type SearchProps = {
-  search: string;
-  setSearch: (update: SetStateAction<string>) => void;
-};
+export function SearchInput() {
+  const { search, setSearch } = useAgendaStore();
 
-export const Search = ({ search, setSearch }: SearchProps) => {
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="relative flex w-full items-center justify-center">
       <input
         type="search"
         className={cx(
-          "relative w-96 bg-gray-50 px-2 py-1.5 pl-12 font-medium",
+          "relative w-full bg-gray-50 px-2 py-1.5 pl-12 font-medium",
           "rounded-md border border-gray-300",
           "transition-all ease-in-out",
           "focus:ring-2 focus:ring-blue-500",
@@ -26,4 +23,4 @@ export const Search = ({ search, setSearch }: SearchProps) => {
       <MdSearch className="absolute left-4 text-gray-500" size={20} />
     </div>
   );
-};
+}

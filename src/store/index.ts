@@ -6,15 +6,22 @@ import {
   FormDataSliceProps,
   IsDoneSliceProps,
   IsUpdateSliceProps,
+  SearchSliceProps,
 } from "~/types";
 import agendaSlice from "./slices/agendaSlice";
 import archiveSlice from "./slices/archiveSlice";
 import formDataSlice from "./slices/formDataSlice";
 import isDoneSlice from "./slices/isDoneSlice";
 import isUpdateSlice from "./slices/isUpdateSlice";
+import { searchSlice } from "./slices/searchSlice";
 
 const useAgendaStore = create<
-  AgendaSliceProps & ArchiveSliceProps & FormDataSliceProps & IsUpdateSliceProps & IsDoneSliceProps
+  AgendaSliceProps &
+    ArchiveSliceProps &
+    FormDataSliceProps &
+    IsUpdateSliceProps &
+    IsDoneSliceProps &
+    SearchSliceProps
 >()(
   devtools(
     persist(
@@ -24,6 +31,7 @@ const useAgendaStore = create<
         ...formDataSlice(...set),
         ...isUpdateSlice(...set),
         ...isDoneSlice(...set),
+        ...searchSlice(...set),
       }),
       {
         name: "agenda",

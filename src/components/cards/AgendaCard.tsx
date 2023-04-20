@@ -1,31 +1,23 @@
-import { ChangeEvent } from "react";
 import { IconType } from "react-icons";
-import { HiArrowPath, HiBookmark, HiTrash } from "react-icons/hi2";
+import reactStringReplace from "react-string-replace";
 import Button from "~/components/Button";
 import { cx } from "~/lib/helpers/cx";
+import { buttonsList } from "~/lib/utils/data";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
-type ButtonsListProps = {
-  id: number;
-  variant: "primary" | "secondary" | "danger";
-  label: "delete" | "edit" | "archive";
-  icon: IconType;
-}[];
+export function AgendaCard({ item }: { item: AgendaProps }) {
+  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate, search } =
+    useAgendaStore((state) => state);
 
-export const AgendaCard = ({ item }: { item: AgendaProps }) => {
-  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
-    (state) => state
-  );
-
-  const handleDeleteAgenda = (id: string) => {
+  function handleDeleteAgenda(id: string) {
     const data = [...agenda];
     const filteredData = data.filter((item) => item.id !== id);
 
     setAgenda(filteredData);
-  };
+  }
 
-  const handleEditAgenda = (id: string) => {
+  function handleEditAgenda(id: string) {
     const data = [...agenda];
     const foundData = data.find((item) => item.id === id);
 
@@ -34,9 +26,9 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
       judul: foundData?.judul as string,
       keterangan: foundData?.keterangan as string,
     });
-  };
+  }
 
-  const handleArchiveAgenda = (id: string) => {
+  function handleArchiveAgenda(id: string) {
     const agendaData = [...agenda];
     const archiveData = [...archive];
 
@@ -52,28 +44,7 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
       isDone: foundAgenda?.isDone as boolean,
     });
     setArchive(archiveData);
-  };
-
-  const buttonsList: ButtonsListProps = [
-    {
-      id: 1,
-      variant: "danger",
-      label: "delete",
-      icon: HiTrash,
-    },
-    {
-      id: 2,
-      variant: "secondary",
-      label: "edit",
-      icon: HiArrowPath,
-    },
-    {
-      id: 3,
-      variant: "primary",
-      label: "archive",
-      icon: HiBookmark,
-    },
-  ];
+  }
 
   return (
     <div
@@ -112,7 +83,13 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
         </div>
       </div>
       <div className="mt-2">
-        <span className="text-2xl font-bold">{item.judul}</span>
+        <span className="text-2xl font-bold">
+          {reactStringReplace(item.judul, search, (match: string, index: number) => (
+            <span className="bg-yellow-600" key={index + 1}>
+              {match}
+            </span>
+          ))}
+        </span>
         <p className="my-3 font-medium">{item.keterangan}</p>
         <div className="flex items-center justify-start space-x-4">
           {buttonsList.map((button) => {
@@ -140,4 +117,4 @@ export const AgendaCard = ({ item }: { item: AgendaProps }) => {
       </div>
     </div>
   );
-};
+}

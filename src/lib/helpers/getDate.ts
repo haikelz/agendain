@@ -1,4 +1,4 @@
-export const getDate = () => {
+export function getDate() {
   const date = new Date();
 
   return date.toLocaleDateString("id-ID", {
@@ -6,4 +6,4 @@ export const getDate = () => {
     month: "long",
     day: "numeric",
   });
-};
+}

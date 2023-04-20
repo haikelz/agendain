@@ -4,17 +4,17 @@ import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
-export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
+export function ArchiveCard({ item }: { item: AgendaProps }) {
   const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
 
-  const handleDeleteArchive = (id: string) => {
+  function handleDeleteArchive(id: string) {
     const data = [...archive];
 
     const filteredArchive = data.filter((item) => item.id !== id);
     setArchive(filteredArchive);
-  };
+  }
 
-  const handleUndoArchive = (id: string) => {
+  function handleUndoArchive(id: string) {
     const agendaData = [...agenda];
     const archiveData = [...archive];
 
@@ -30,7 +30,7 @@ export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
       isDone: foundArchive?.isDone as boolean,
     });
     setAgenda(agendaData);
-  };
+  }
 
   return (
     <div
@@ -83,4 +83,4 @@ export const ArchiveCard = ({ item }: { item: AgendaProps }) => {
       </div>
     </div>
   );
-};
+}
