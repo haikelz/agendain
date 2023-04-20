@@ -5,6 +5,7 @@ import {
   ArchiveSliceProps,
   FormDataSliceProps,
   IsDoneSliceProps,
+  IsOpenModalSliceProps,
   IsUpdateSliceProps,
   SearchSliceProps,
 } from "~/types";
@@ -12,8 +13,9 @@ import agendaSlice from "./slices/agendaSlice";
 import archiveSlice from "./slices/archiveSlice";
 import formDataSlice from "./slices/formDataSlice";
 import isDoneSlice from "./slices/isDoneSlice";
+import isOpenModalSlice from "./slices/isOpenModalSlice";
 import isUpdateSlice from "./slices/isUpdateSlice";
-import { searchSlice } from "./slices/searchSlice";
+import searchSlice from "./slices/searchSlice";
 
 const useAgendaStore = create<
   AgendaSliceProps &
@@ -21,6 +23,7 @@ const useAgendaStore = create<
     FormDataSliceProps &
     IsUpdateSliceProps &
     IsDoneSliceProps &
+    IsOpenModalSliceProps &
     SearchSliceProps
 >()(
   devtools(
@@ -31,6 +34,7 @@ const useAgendaStore = create<
         ...formDataSlice(...set),
         ...isUpdateSlice(...set),
         ...isDoneSlice(...set),
+        ...isOpenModalSlice(...set),
         ...searchSlice(...set),
       }),
       {

@@ -14,13 +14,16 @@ const Button = ({ children, variant, className, label, onClick }: ButtonProps) =
       type="button"
       aria-label={label}
       className={cx(
-        "rounded-md text-white shadow-lg transition-all ease-in-out",
+        "rounded-md",
+        "flex items-center justify-center space-x-2 text-white shadow-lg",
+        "text-base",
+        "transition-all ease-in-out",
         variant === "primary"
-          ? "bg-blue-500 hover:bg-blue-600"
+          ? "bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
           : variant === "secondary"
-          ? "bg-gray-500 hover:bg-gray-600"
+          ? "bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-4 focus:ring-teal-300 dark:focus:ring-teal-800"
           : variant === "danger"
-          ? "bg-red-500 hover:bg-red-600"
+          ? "bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800"
           : "",
         className
       )}

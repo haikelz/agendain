@@ -10,9 +10,10 @@ Still under construction!
 ## Tech Stack
 
 - React JS
+- Tailwind CSS with Flowbite as UI components
 - Vite
 - Typescript
-- Tailwind CSS with Flowbite as UI components
+- Clerk
 - Zustand
 
 ## Getting Started

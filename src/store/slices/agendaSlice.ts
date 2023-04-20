@@ -1,10 +1,5 @@
 import { StateCreator } from "zustand";
-import { AgendaProps } from "~/types";
-
-type AgendaSliceProps = {
-  agenda: AgendaProps[];
-  setAgenda: (agenda: AgendaProps[]) => void;
-};
+import { AgendaSliceProps } from "~/types";
 
 const agendaSlice: StateCreator<AgendaSliceProps, [], [], AgendaSliceProps> = (set) => ({
   agenda: [],

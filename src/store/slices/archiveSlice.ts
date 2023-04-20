@@ -1,10 +1,5 @@
 import { StateCreator } from "zustand";
-import { AgendaProps } from "~/types";
-
-type ArchiveSliceProps = {
-  archive: AgendaProps[];
-  setArchive: (archive: AgendaProps[]) => void;
-};
+import { ArchiveSliceProps } from "~/types";
 
 const archiveSlice: StateCreator<ArchiveSliceProps, [], [], ArchiveSliceProps> = (set) => ({
   archive: [],

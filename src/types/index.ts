@@ -54,3 +54,8 @@ export type SearchSliceProps = {
   search: string;
   setSearch: (search: string) => void;
 };
+
+export type IsOpenModalSliceProps = {
+  isOpenModal: boolean;
+  setIsOpenModal: (isOpenModal: boolean) => void;
+};

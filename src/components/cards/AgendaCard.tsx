@@ -83,14 +83,16 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
         </div>
       </div>
       <div className="mt-2">
-        <span className="text-2xl font-bold">
+        <h3 className={cx("text-2xl font-bold", item.isDone ? "line-through" : "")}>
           {reactStringReplace(item.judul, search, (match: string, index: number) => (
             <span className="bg-yellow-600" key={index + 1}>
               {match}
             </span>
           ))}
-        </span>
-        <p className="my-3 font-medium">{item.keterangan}</p>
+        </h3>
+        <p className={cx("my-3 font-medium", item.isDone ? "line-through" : "")}>
+          {item.keterangan}
+        </p>
         <div className="flex items-center justify-start space-x-4">
           {buttonsList.map((button) => {
             const Icon: IconType = button.icon;
