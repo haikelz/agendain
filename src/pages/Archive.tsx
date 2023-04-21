@@ -19,7 +19,7 @@ export default function Archive() {
   );
 
   useEffect(() => {
-    document.title = "Archive";
+    document.title = "Archive | Agendain";
   }, []);
 
   return (
