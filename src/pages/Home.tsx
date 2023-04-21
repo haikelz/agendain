@@ -120,8 +120,8 @@ export default function Home() {
         <h2 className="my-6 text-center text-3xl font-bold">List Agenda</h2>
         {filteredAgenda.length ? (
           <div className={cx("grid grid-cols-1 grid-rows-1 gap-4")}>
-            {filteredAgenda.map((item, index) => (
-              <AgendaCard key={index + 1} item={item} />
+            {filteredAgenda.map((item) => (
+              <AgendaCard key={item.id} item={item} />
             ))}
           </div>
         ) : (

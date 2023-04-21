@@ -17,10 +17,11 @@ export function KeteranganTextArea({ handleChangeAgenda }: KeteranganTextAreaPro
       <textarea
         className={cx(
           "mt-2 p-2 font-medium",
-          "h-32 focus:ring-2 focus:ring-blue-600",
-          "border border-gray-300 dark:border-gray-500",
-          "rounded-md bg-gray-50 dark:bg-gray-800",
-          "transition-all ease-in-out"
+          "h-32 border border-gray-300",
+          "rounded-md bg-gray-50",
+          "transition-all ease-in-out",
+          "dark:border-gray-500 dark:bg-gray-800",
+          "focus:ring-2 focus:ring-blue-600"
         )}
         placeholder="Ketik disini...."
         name="keterangan"

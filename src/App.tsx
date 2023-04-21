@@ -1,15 +1,14 @@
 import { ClerkProvider, RedirectToSignIn, SignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NotFoundPage from "./pages/404";
-import Home from "./pages/Home";
-import Archive from "./pages/Archive";
 import { LazyMotion, domAnimation } from "framer-motion";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { clerkPubKey } from "./lib/utils/constants";
+import NotFoundPage from "./pages/404";
+import Archive from "./pages/Archive";
+import Home from "./pages/Home";
 
-if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+if (!clerkPubKey) {
   throw new Error("Missing Publishable Key!");
 }
-
-const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 export default function App() {
   return (

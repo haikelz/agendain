@@ -1,10 +1,10 @@
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import { MdSearch } from "react-icons/md";
 import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 
 export function SearchInput() {
-  const { search, setSearch } = useAgendaStore();
+  const search = useAgendaStore((state) => state.search);
+  const setSearch = useAgendaStore((state) => state.setSearch);
 
   return (
     <div className="relative flex w-full items-center justify-center">
@@ -21,7 +21,10 @@ export function SearchInput() {
         value={search}
         onChange={(event) => setSearch(event.target.value)}
       />
-      <HiMagnifyingGlass className="absolute  left-4 text-gray-900 dark:text-gray-500" size={20} />
+      <HiMagnifyingGlass
+        className={cx("absolute left-4", "text-gray-900", "dark:text-gray-500")}
+        size={20}
+      />
     </div>
   );
 }

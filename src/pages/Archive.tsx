@@ -23,12 +23,12 @@ export default function Archive() {
 
   return (
     <Layout>
-      <h1 className="text-4xl font-bold">Archive</h1>
-      <p className="my-4 mt-1 text-center font-medium">
-        Cari agenda yang telah kamu archivekan disini!
-      </p>
-      <SearchInput />
-      <div className="mt-6 w-full">
+      <section className="flex flex-col items-center justify-center text-center">
+        <h1 className="text-4xl font-bold">Archive</h1>
+        <p className="my-4 mt-1 font-medium">Cari agenda yang telah kamu archivekan disini!</p>
+        <SearchInput />
+      </section>
+      <section className="mt-6 w-full">
         <h2 className="text-center text-2xl font-bold">List Archive</h2>
         {filteredArchive.length ? (
           <div className={cx("mt-6 grid grid-cols-1 grid-rows-1 gap-4")}>
@@ -37,9 +37,11 @@ export default function Archive() {
             ))}
           </div>
         ) : (
-          <TidakAda description="Kamu belum mempunyai archive!" />
+          <div>
+            <TidakAda description="Kamu belum mempunyai archive!" />
+          </div>
         )}
-      </div>
+      </section>
     </Layout>
   );
 }
