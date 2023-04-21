@@ -32,7 +32,7 @@ export default function Layout({ children }: ChildrenProps) {
               <div className="flex items-center justify-between">
                 <Link to="/">
                   <div className="flex items-center justify-center">
-                    <img className="h-7 w-7" src="/logo.svg" alt="logo" />
+                    <img className="h-8 w-8" src="/logo.svg" alt="logo" />
                   </div>
                 </Link>
                 <div className="flex items-center justify-center space-x-3">
@@ -57,8 +57,7 @@ export default function Layout({ children }: ChildrenProps) {
                       className="h-8 w-8 cursor-pointer rounded-full"
                       src={user.profileImageUrl}
                       alt="user profile"
-                      loading="lazy"
-                      decoding="async"
+                      loading="eager"
                     />
                   </button>
                 </div>
