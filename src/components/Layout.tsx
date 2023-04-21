@@ -41,7 +41,7 @@ export default function Layout({ children }: ChildrenProps) {
                     className={cx(
                       "rounded-md bg-gray-200 p-1.5",
                       "hover:bg-gray-300",
-                      "dark:bg-gray-800"
+                      "dark:bg-gray-700"
                     )}
                     type="button"
                     aria-label="change mode theme"
@@ -72,7 +72,7 @@ export default function Layout({ children }: ChildrenProps) {
                 transition={{ duration: 0.4 }}
                 initial="hidden"
                 animate="visible"
-                className="my-4 flex w-full flex-col items-center justify-center"
+                className="my-4 flex w-full items-center justify-center"
               >
                 {children}
               </m.main>

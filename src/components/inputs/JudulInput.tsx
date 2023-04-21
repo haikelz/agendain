@@ -1,4 +1,4 @@
-import { TextInput } from "flowbite-react";
+import { Label, TextInput } from "flowbite-react";
 import { ChangeEvent } from "react";
 import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
@@ -12,18 +12,10 @@ export function JudulInput({ handleChangeAgenda }: JudulInputProps) {
 
   return (
     <div className="flex w-full flex-col">
-      <label className="text-base font-semibold" htmlFor="judul">
-        Judul
-      </label>
-      <input
+      <Label htmlFor="judul">Judul</Label>
+      <TextInput
         type="text"
-        className={cx(
-          "mt-2 p-2 font-medium",
-          "rounded-md border border-gray-300 bg-gray-50",
-          "transition-all ease-in-out",
-          "focus:ring-2 focus:ring-blue-600",
-          "dark:border-gray-500 dark:bg-gray-800"
-        )}
+        className="mt-2"
         placeholder="Ketik disini...."
         name="judul"
         value={formData.judul}

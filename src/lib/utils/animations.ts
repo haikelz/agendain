@@ -7,7 +7,7 @@ export const popUpModal: Variants = {
 };
 
 export const pageTransition: Variants = {
-  hidden: { opacity: 0, y: 100 },
+  hidden: { opacity: 0, y: 80 },
   visible: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 100 },
+  exit: { opacity: 0, y: 80 },
 };

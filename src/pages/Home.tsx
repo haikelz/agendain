@@ -67,66 +67,70 @@ export default function Home() {
 
   return (
     <Layout>
-      <h1 className="text-4xl font-bold">Agendain</h1>
-      <p className="mt-2 font-medium">Apa agendamu hari ini?</p>
-      <form className="my-6 w-full" onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center justify-center gap-4">
-          <JudulInput handleChangeAgenda={handleChangeAgenda} />
-          <KeteranganTextArea handleChangeAgenda={handleChangeAgenda} />
-          <div className="flex items-center justify-center space-x-3">
-            <button
-              type="submit"
-              aria-label="submit"
-              className={cx(
-                "flex items-center space-x-2 px-3 py-2",
-                "rounded-md bg-blue-600 text-white",
-                "hover:bg-blue-700",
-                "focus:outline-none focus:ring-4 focus:ring-blue-300",
-                "dark:focus:ring-blue-800"
-              )}
-            >
-              {isUpdate.status ? (
-                <>
-                  <span>Update</span>
-                  <HiArrowPath size={22} />
-                </>
-              ) : (
-                <>
-                  <span>Tambahkan</span>
-                  <HiPlus size={22} />
-                </>
-              )}
-            </button>
-            <Link to="/archive">
-              <Button
-                variant="secondary"
-                label="Go to Archive"
-                className="flex items-center space-x-2 px-3 py-2"
-              >
-                <span>Go to Archive</span>
-                <HiArrowTopRightOnSquare />
-              </Button>
-            </Link>
-          </div>
+      <div className="flex w-full flex-col items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">Agendain</h1>
+          <p className="mt-2 font-medium">Apa agendamu hari ini?</p>
         </div>
-      </form>
-      <SearchInput />
-      <div
-        className={cx(
-          "flex w-full flex-col justify-center",
-          filteredAgenda.length ? "" : "items-center"
-        )}
-      >
-        <h2 className="my-6 text-center text-3xl font-bold">List Agenda</h2>
-        {filteredAgenda.length ? (
-          <div className={cx("grid grid-cols-1 grid-rows-1 gap-4")}>
-            {filteredAgenda.map((item) => (
-              <AgendaCard key={item.id} item={item} />
-            ))}
+        <form className="my-6 w-full" onSubmit={handleSubmit}>
+          <div className="flex flex-col items-center justify-center gap-4">
+            <JudulInput handleChangeAgenda={handleChangeAgenda} />
+            <KeteranganTextArea handleChangeAgenda={handleChangeAgenda} />
+            <div className="flex items-center justify-center space-x-3">
+              <button
+                type="submit"
+                aria-label="submit"
+                className={cx(
+                  "flex items-center space-x-2 px-3 py-2",
+                  "rounded-md bg-blue-600 text-white",
+                  "hover:bg-blue-700",
+                  "focus:outline-none focus:ring-4 focus:ring-blue-300",
+                  "dark:focus:ring-blue-800"
+                )}
+              >
+                {isUpdate.status ? (
+                  <>
+                    <span>Update</span>
+                    <HiArrowPath size={22} />
+                  </>
+                ) : (
+                  <>
+                    <span>Tambahkan</span>
+                    <HiPlus size={22} />
+                  </>
+                )}
+              </button>
+              <Link to="/archive">
+                <Button
+                  variant="secondary"
+                  label="Go to Archive"
+                  className="flex items-center space-x-2 px-3 py-2"
+                >
+                  <span>Go to Archive</span>
+                  <HiArrowTopRightOnSquare />
+                </Button>
+              </Link>
+            </div>
           </div>
-        ) : (
-          <TidakAda description="Kamu belum mempunyai agenda!" />
-        )}
+        </form>
+        <SearchInput />
+        <div
+          className={cx(
+            "flex w-full flex-col justify-center",
+            filteredAgenda.length ? "" : "items-center"
+          )}
+        >
+          <h2 className="my-6 text-center text-3xl font-bold">List Agenda</h2>
+          {filteredAgenda.length ? (
+            <div className={cx("grid grid-cols-1 grid-rows-1 gap-4")}>
+              {filteredAgenda.map((item) => (
+                <AgendaCard key={item.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <TidakAda description="Kamu belum mempunyai agenda!" />
+          )}
+        </div>
       </div>
     </Layout>
   );

@@ -79,7 +79,7 @@ export default function Modal({ user }: ModalProps) {
               />
             </div>
             <div className="my-3 flex flex-col items-center justify-center">
-              <h4 className="font-inter text-2xl">{user.fullName}</h4>
+              <h4 className="text-2xl">{user.fullName}</h4>
               <div className="mt-1 flex flex-col items-center justify-center">
                 <span>
                   <span className="font-bold">Email: </span>{" "}
