@@ -13,10 +13,9 @@ export default function Layout({ children }: ChildrenProps) {
   const [darkMode, setDarkMode] = useDarkMode();
 
   const { isLoaded, isSignedIn, user } = useUser();
+  const { isOpenModal, setIsOpenModal } = useAgendaStore((state) => state);
 
   const location = useLocation();
-  const isOpenModal = useAgendaStore((state) => state.isOpenModal);
-  const setIsOpenModal = useAgendaStore((state) => state.setIsOpenModal);
 
   if (!isLoaded || !isSignedIn) {
     return null;
@@ -41,7 +40,7 @@ export default function Layout({ children }: ChildrenProps) {
                     className={cx(
                       "rounded-md bg-gray-200 p-1.5",
                       "hover:bg-gray-300",
-                      "dark:bg-gray-700"
+                      "dark:bg-gray-700 dark:hover:bg-gray-800"
                     )}
                     type="button"
                     aria-label="change mode theme"

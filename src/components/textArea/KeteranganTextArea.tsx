@@ -13,7 +13,7 @@ export function KeteranganTextArea({ handleChangeAgenda }: KeteranganTextAreaPro
     <div className="flex w-full flex-col">
       <Label htmlFor="keterangan">Keterangan</Label>
       <Textarea
-        className="mt-2 h-32"
+        className="mt-2 h-32 text-sm"
         placeholder="Ketik disini...."
         name="keterangan"
         value={formData.keterangan}

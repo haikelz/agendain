@@ -7,8 +7,7 @@ import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 
 export default function Archive() {
-  const archive = useAgendaStore((state) => state.archive);
-  const search = useAgendaStore((state) => state.search);
+  const { archive, search } = useAgendaStore((state) => state);
 
   const filteredArchive = useMemo(
     () =>

@@ -8,7 +8,7 @@ type ButtonProps = ChildrenProps & {
   label: string;
 } & HTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ children, variant, className, label, onClick }: ButtonProps) => {
+export default function Button({ children, variant, className, label, onClick }: ButtonProps) {
   return (
     <button
       type="button"
@@ -33,6 +33,4 @@ const Button = ({ children, variant, className, label, onClick }: ButtonProps) =
       {children}
     </button>
   );
-};
-
-export default Button;
+}
