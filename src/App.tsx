@@ -1,10 +1,13 @@
 import { ClerkProvider, RedirectToSignIn, SignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { LazyMotion, domAnimation } from "framer-motion";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { clerkPubKey } from "./lib/utils/constants";
-import NotFoundPage from "./pages/404";
-import Archive from "./pages/Archive";
-import Home from "./pages/Home";
+import Loading from "./pages/Loading";
+
+const Home = lazy(() => import("./pages/Home"));
+const NotFoundPage = lazy(() => import("./pages/404"));
+const Archive = lazy(() => import("./pages/Archive"));
 
 if (!clerkPubKey) {
   throw new Error("Missing Publishable Key!");
@@ -22,7 +25,9 @@ export default function App() {
               element={
                 <>
                   <SignedIn>
-                    <Home />
+                    <Suspense fallback={<Loading />}>
+                      <Home />
+                    </Suspense>
                   </SignedIn>
                   <SignedOut>
                     <RedirectToSignIn />
@@ -35,7 +40,9 @@ export default function App() {
               element={
                 <>
                   <SignedIn>
-                    <Archive />
+                    <Suspense fallback={<Loading />}>
+                      <Archive />
+                    </Suspense>
                   </SignedIn>
                   <SignedOut>
                     <RedirectToSignIn />
@@ -43,7 +50,14 @@ export default function App() {
                 </>
               }
             />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NotFoundPage />
+                </Suspense>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </LazyMotion>

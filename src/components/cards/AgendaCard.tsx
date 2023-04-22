@@ -1,4 +1,4 @@
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import { IconType } from "react-icons";
 import reactStringReplace from "react-string-replace";
 import Button from "~/components/Button";
@@ -75,10 +75,10 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
             )}
             onChange={(event) =>
               setAgenda(
-                agenda.map((value) =>
-                  value.judul === event.target.name
-                    ? { ...value, isDone: event.target.checked }
-                    : value
+                agenda.map((item) =>
+                  item.judul === event.target.name
+                    ? { ...item, isDone: event.target.checked }
+                    : item
                 )
               )
             }
