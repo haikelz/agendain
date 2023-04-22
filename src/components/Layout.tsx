@@ -2,7 +2,7 @@ import { useUser } from "@clerk/clerk-react";
 import { AnimatePresence, m } from "framer-motion";
 import { HiMoon, HiSun } from "react-icons/hi2";
 import { Link, useLocation } from "react-router-dom";
-import { useDarkMode } from "~/hooks/useDarkMode";
+import { useDarkMode } from "~/hooks";
 import { cx } from "~/lib/helpers/cx";
 import { pageTransition } from "~/lib/utils/animations";
 import useAgendaStore from "~/store";
@@ -65,11 +65,11 @@ export default function Layout({ children }: ChildrenProps) {
             </nav>
             <AnimatePresence mode="wait">
               <m.main
-                key={location.pathname}
                 variants={pageTransition}
                 transition={{ duration: 0.4 }}
                 initial="hidden"
                 animate="visible"
+                exit="exit"
                 className="my-4 flex w-full items-center justify-center"
               >
                 {children}
@@ -78,7 +78,7 @@ export default function Layout({ children }: ChildrenProps) {
           </div>
         </div>
       </div>
-      {isOpenModal ? <Modal user={user} /> : null}
+      <AnimatePresence mode="wait">{isOpenModal ? <Modal user={user} /> : null}</AnimatePresence>
     </>
   );
 }

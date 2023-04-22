@@ -1,7 +1,9 @@
+import { AnimatePresence, m } from "framer-motion";
 import { IconType } from "react-icons";
 import reactStringReplace from "react-string-replace";
 import Button from "~/components/Button";
 import { cx } from "~/lib/helpers/cx";
+import { leftToRight } from "~/lib/utils/animations";
 import { buttonsList } from "~/lib/utils/data";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
@@ -47,7 +49,11 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
   }
 
   return (
-    <div
+    <m.div
+      variants={leftToRight}
+      transition={{ duration: 0.4 }}
+      initial="hidden"
+      animate="visible"
       className={cx(
         "flex flex-col justify-start shadow-sm",
         "rounded-md border border-gray-300 p-3",
@@ -115,6 +121,6 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
           })}
         </div>
       </div>
-    </div>
+    </m.div>
   );
 }

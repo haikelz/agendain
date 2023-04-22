@@ -1,5 +1,6 @@
 import format from "date-fns/format";
 import id from "date-fns/locale/id";
+import { AnimatePresence } from "framer-motion";
 import { nanoid } from "nanoid";
 import { ChangeEvent, FormEvent, useMemo } from "react";
 import { HiArrowPath, HiArrowTopRightOnSquare, HiPlus } from "react-icons/hi2";
@@ -123,9 +124,11 @@ export default function Home() {
           <h2 className="my-6 text-center text-3xl font-bold">List Agenda</h2>
           {filteredAgenda.length ? (
             <div className={cx("grid grid-cols-1 grid-rows-1 gap-4")}>
-              {filteredAgenda.map((item) => (
-                <AgendaCard key={item.id} item={item} />
-              ))}
+              <AnimatePresence mode="wait">
+                {filteredAgenda.map((item) => (
+                  <AgendaCard key={item.id} item={item} />
+                ))}
+              </AnimatePresence>
             </div>
           ) : (
             <TidakAda description="Kamu belum mempunyai agenda!" />

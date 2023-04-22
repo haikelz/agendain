@@ -11,3 +11,8 @@ export const pageTransition: Variants = {
   visible: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: 80 },
 };
+
+export const leftToRight: Variants = {
+  hidden: { opacity: 0, x: -80 },
+  visible: { opacity: 1, x: 0 },
+};

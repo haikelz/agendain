@@ -1,7 +1,9 @@
+import { m } from "framer-motion";
 import { HiArrowPath, HiTrash } from "react-icons/hi2";
 import reactStringReplace from "react-string-replace";
 import Button from "~/components/Button";
 import { cx } from "~/lib/helpers/cx";
+import { leftToRight } from "~/lib/utils/animations";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
@@ -34,7 +36,11 @@ export function ArchiveCard({ item }: { item: AgendaProps }) {
   }
 
   return (
-    <div
+    <m.div
+      variants={leftToRight}
+      transition={{ duration: 0.4 }}
+      initial="hidden"
+      animate="visible"
       className={cx(
         "flex flex-col justify-start shadow-sm",
         "rounded-md border border-gray-300 p-3",
@@ -88,6 +94,6 @@ export function ArchiveCard({ item }: { item: AgendaProps }) {
           </Button>
         </div>
       </div>
-    </div>
+    </m.div>
   );
 }
