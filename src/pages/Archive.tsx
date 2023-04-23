@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "~/components/Layout";
 import TidakAda from "~/components/TidakAda";
 import { ArchiveCard } from "~/components/cards";
@@ -7,7 +7,9 @@ import { cx } from "~/lib/helpers/cx";
 import useAgendaStore from "~/store";
 
 export default function Archive() {
-  const { archive, search } = useAgendaStore((state) => state);
+  const [search, setSearch] = useState<string>("");
+
+  const archive = useAgendaStore((state) => state.archive);
 
   const filteredArchive = useMemo(
     () =>
@@ -28,14 +30,14 @@ export default function Archive() {
         <section className="flex flex-col items-center justify-center text-center">
           <h1 className="text-4xl font-bold">Archive</h1>
           <p className="my-4 mt-1 font-medium">Cari agenda yang telah kamu archivekan disini!</p>
-          <SearchInput />
+          <SearchInput search={search} setSearch={setSearch} />
         </section>
         <section className="mt-6 w-full">
           <h2 className="my-6 text-center text-3xl font-bold">List Archive</h2>
           {filteredArchive.length ? (
             <div className={cx("mt-6 grid grid-cols-1 grid-rows-1 gap-4")}>
               {filteredArchive.map((item) => (
-                <ArchiveCard key={item.id} item={item} />
+                <ArchiveCard key={item.id} item={item} search={search} />
               ))}
             </div>
           ) : (

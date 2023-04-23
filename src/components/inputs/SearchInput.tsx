@@ -1,10 +1,13 @@
+import { SetStateAction } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { cx } from "~/lib/helpers/cx";
-import useAgendaStore from "~/store";
 
-export function SearchInput() {
-  const { search, setSearch } = useAgendaStore((state) => state);
+type SearchInputProps = {
+  search: string;
+  setSearch: (search: SetStateAction<string>) => void;
+};
 
+export function SearchInput({ search, setSearch }: SearchInputProps) {
   return (
     <div className="relative flex w-full items-center justify-center">
       <input

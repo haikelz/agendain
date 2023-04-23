@@ -1,4 +1,4 @@
-import { Variant, Variants } from "framer-motion";
+import { Variants } from "framer-motion";
 
 export const popUpModal: Variants = {
   hidden: { opacity: 0, scale: 0 },

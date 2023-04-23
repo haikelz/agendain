@@ -1,7 +1,7 @@
 import { useClerk, useUser } from "@clerk/clerk-react";
 import { format } from "date-fns";
 import id from "date-fns/locale/id";
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import { HiXMark } from "react-icons/hi2";
 import { cx } from "~/lib/helpers/cx";
 import { popUpModal } from "~/lib/utils/animations";

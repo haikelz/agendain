@@ -83,7 +83,7 @@ export default function Layout({ children }: ChildrenProps) {
               <m.main
                 key={location.pathname}
                 variants={pageTransition}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.3  }}
                 initial="hidden"
                 animate="visible"
                 exit="exit"

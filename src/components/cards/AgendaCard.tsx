@@ -8,9 +8,15 @@ import { buttonsList } from "~/lib/utils/data";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
-export function AgendaCard({ item }: { item: AgendaProps }) {
-  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate, search } =
-    useAgendaStore((state) => state);
+type AgendaCardProps = {
+  item: AgendaProps;
+  search: string;
+};
+
+export function AgendaCard({ item, search }: AgendaCardProps) {
+  const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
+    (state) => state
+  );
 
   function handleDeleteAgenda(id: string) {
     const data = [...agenda];
@@ -51,7 +57,7 @@ export function AgendaCard({ item }: { item: AgendaProps }) {
   return (
     <m.div
       variants={leftToRight}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.3 }}
       initial="hidden"
       animate="visible"
       className={cx(

@@ -7,8 +7,13 @@ import { leftToRight } from "~/lib/utils/animations";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
-export function ArchiveCard({ item }: { item: AgendaProps }) {
-  const { agenda, archive, setArchive, setAgenda, search } = useAgendaStore((state) => state);
+type AgendaCardProps = {
+  item: AgendaProps;
+  search: string;
+};
+
+export function ArchiveCard({ item, search }: AgendaCardProps) {
+  const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
 
   function handleDeleteArchive(id: string) {
     const data = [...archive];
@@ -38,7 +43,7 @@ export function ArchiveCard({ item }: { item: AgendaProps }) {
   return (
     <m.div
       variants={leftToRight}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.3 }}
       initial="hidden"
       animate="visible"
       className={cx(

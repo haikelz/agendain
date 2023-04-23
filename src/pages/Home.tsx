@@ -2,7 +2,7 @@ import format from "date-fns/format";
 import id from "date-fns/locale/id";
 import { AnimatePresence } from "framer-motion";
 import { nanoid } from "nanoid";
-import { ChangeEvent, FormEvent, useMemo } from "react";
+import { ChangeEvent, FormEvent, useMemo, useState } from "react";
 import { HiArrowPath, HiArrowTopRightOnSquare, HiPlus } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import Button from "~/components/Button";
@@ -16,8 +16,11 @@ import useAgendaStore from "~/store";
 import { IndexTargetValueProps } from "~/types";
 
 export default function Home() {
-  const { agenda, setAgenda, formData, setFormData, isUpdate, setIsUpdate, search } =
-    useAgendaStore((state) => state);
+  const [search, setSearch] = useState<string>("");
+
+  const { agenda, setAgenda, formData, setFormData, isUpdate, setIsUpdate } = useAgendaStore(
+    (state) => state
+  );
 
   function handleChangeAgenda<T extends ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>(
     event: T
@@ -114,7 +117,7 @@ export default function Home() {
             </div>
           </div>
         </form>
-        <SearchInput />
+        <SearchInput search={search} setSearch={setSearch} />
         <div
           className={cx(
             "flex w-full flex-col justify-center",
@@ -126,7 +129,7 @@ export default function Home() {
             <div className={cx("grid grid-cols-1 grid-rows-1 gap-4")}>
               <AnimatePresence mode="wait">
                 {filteredAgenda.map((item) => (
-                  <AgendaCard key={item.id} item={item} />
+                  <AgendaCard key={item.id} item={item} search={search} />
                 ))}
               </AnimatePresence>
             </div>

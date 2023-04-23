@@ -7,7 +7,6 @@ import {
   IsDoneSliceProps,
   IsOpenModalSliceProps,
   IsUpdateSliceProps,
-  SearchSliceProps,
 } from "~/types";
 import agendaSlice from "./slices/agendaSlice";
 import archiveSlice from "./slices/archiveSlice";
@@ -15,16 +14,18 @@ import formDataSlice from "./slices/formDataSlice";
 import isDoneSlice from "./slices/isDoneSlice";
 import isOpenModalSlice from "./slices/isOpenModalSlice";
 import isUpdateSlice from "./slices/isUpdateSlice";
-import searchSlice from "./slices/searchSlice";
 
+/**
+ * Slice the store into smaller stores
+ * @see https://github.com/pmndrs/zustand/blob/main/docs/guides/slices-pattern.md
+ */
 const useAgendaStore = create<
   AgendaSliceProps &
     ArchiveSliceProps &
     FormDataSliceProps &
     IsUpdateSliceProps &
     IsDoneSliceProps &
-    IsOpenModalSliceProps &
-    SearchSliceProps
+    IsOpenModalSliceProps
 >()(
   devtools(
     persist(
@@ -35,7 +36,6 @@ const useAgendaStore = create<
         ...isUpdateSlice(...set),
         ...isDoneSlice(...set),
         ...isOpenModalSlice(...set),
-        ...searchSlice(...set),
       }),
       {
         name: "agenda",
