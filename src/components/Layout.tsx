@@ -50,7 +50,7 @@ export default function Layout({ children }: ChildrenProps) {
                 </div>
               </Link>
               <div className="flex items-center justify-center space-x-3">
-                <Tooltip content={darkMode === "dark" ? "Light" : "Dark"} trigger="hover">
+                <Tooltip content={darkMode === "dark" ? "Dark" : "Light"} trigger="hover">
                   <button
                     className={cx(
                       "overflow-hidden rounded-md bg-gray-200 p-1.5",
