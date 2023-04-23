@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { memo } from "react";
 import { IconType } from "react-icons";
 import reactStringReplace from "react-string-replace";
 import Button from "~/components/Button";
@@ -14,6 +15,7 @@ type AgendaCardProps = {
 };
 
 export function AgendaCard({ item, search }: AgendaCardProps) {
+  console.log("dirender");
   const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
     (state) => state
   );
@@ -130,3 +132,5 @@ export function AgendaCard({ item, search }: AgendaCardProps) {
     </m.div>
   );
 }
+
+memo(AgendaCard);

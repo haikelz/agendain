@@ -70,7 +70,7 @@ export default function Layout({ children }: ChildrenProps) {
                     onClick={() => setIsOpenModal(!isOpenModal)}
                   >
                     <img
-                      className="h-8 w-8 cursor-pointer rounded-full"
+                      className="h-8 w-8 cursor-pointer rounded-full transition-all ease-in-out hover:border-2 hover:border-blue-600"
                       src={user.profileImageUrl}
                       alt="user profile"
                       loading="eager"
@@ -83,7 +83,7 @@ export default function Layout({ children }: ChildrenProps) {
               <m.main
                 key={location.pathname}
                 variants={pageTransition}
-                transition={{ duration: 0.3  }}
+                transition={{ duration: 0.3 }}
                 initial="hidden"
                 animate="visible"
                 exit="exit"

@@ -60,11 +60,8 @@ export default function Home() {
   const filteredAgenda = useMemo(
     () =>
       agenda.filter((item) => {
-        if (item.judul === search) {
-          return item;
-        } else if (item.judul?.toLowerCase().includes(search.toLowerCase())) {
-          return item;
-        }
+        if (item.judul === search) return item;
+        else if (item.judul?.toLowerCase().includes(search.toLowerCase())) return item;
       }),
     [search, agenda]
   );
@@ -86,8 +83,8 @@ export default function Home() {
                 aria-label="submit"
                 className={cx(
                   "flex items-center space-x-2 px-3 py-2",
-                  "rounded-md bg-blue-600 text-white",
-                  "hover:bg-blue-700",
+                  "rounded-md bg-blue-600 text-white transition-all ease-in-out",
+                  "hover:-translate-y-1 hover:bg-blue-700",
                   "focus:outline-none focus:ring-4 focus:ring-blue-300",
                   "dark:focus:ring-blue-800"
                 )}
@@ -108,7 +105,7 @@ export default function Home() {
                 <Button
                   variant="secondary"
                   label="Go to Archive"
-                  className="flex items-center space-x-2 px-3 py-2"
+                  className={cx("flex items-center space-x-2 px-3 py-2 hover:-translate-y-1")}
                 >
                   <span>Go to Archive</span>
                   <HiArrowTopRightOnSquare />
@@ -127,7 +124,7 @@ export default function Home() {
           <h2 className="my-6 text-center text-3xl font-bold">List Agenda</h2>
           {filteredAgenda.length ? (
             <div className={cx("grid grid-cols-1 grid-rows-1 gap-4")}>
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="sync">
                 {filteredAgenda.map((item) => (
                   <AgendaCard key={item.id} item={item} search={search} />
                 ))}

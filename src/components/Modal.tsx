@@ -9,7 +9,7 @@ import useAgendaStore from "~/store";
 import Button from "./Button";
 
 /**
- * If you hover user type, you will get `UserResource` type.
+ * If we hover user type, we will get `UserResource` type.
  * But why we can't import it from clerk?
  * @see https://github.com/clerkinc/javascript/issues/116
  */
@@ -70,7 +70,7 @@ export default function Modal({ user }: ModalProps) {
           </div>
           <div className="my-4 flex w-full items-center justify-center">
             <img
-              className="h-60 w-60 rounded-full"
+              className="h-60 w-60 rounded-full border-[3px] border-blue-600"
               src={user.profileImageUrl}
               alt="user profile"
               loading="lazy"
