@@ -59,3 +59,8 @@ export type IsOpenModalSliceProps = {
   isOpenModal: boolean;
   setIsOpenModal: (isOpenModal: boolean) => void;
 };
+
+export type DarkModeSliceProps = {
+  darkMode: string;
+  setDarkMode: (darkMode: string) => void;
+};

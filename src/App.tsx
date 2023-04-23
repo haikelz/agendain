@@ -17,49 +17,51 @@ export default function App() {
   return (
     <ClerkProvider publishableKey={clerkPubKey}>
       <LazyMotion features={domAnimation}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/sign-in" element={<SignIn routing="path" path="/sign-in" />} />
-            <Route
-              path="/"
-              element={
-                <>
-                  <SignedIn>
-                    <Suspense fallback={<Loading />}>
-                      <Home />
-                    </Suspense>
-                  </SignedIn>
-                  <SignedOut>
-                    <RedirectToSignIn />
-                  </SignedOut>
-                </>
-              }
-            />
-            <Route
-              path="/archive"
-              element={
-                <>
-                  <SignedIn>
-                    <Suspense fallback={<Loading />}>
-                      <Archive />
-                    </Suspense>
-                  </SignedIn>
-                  <SignedOut>
-                    <RedirectToSignIn />
-                  </SignedOut>
-                </>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <NotFoundPage />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
+        <div className="dark:bg-gray-900 dark:text-gray-200">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/sign-in" element={<SignIn routing="path" path="/sign-in" />} />
+              <Route
+                path="/"
+                element={
+                  <>
+                    <SignedIn>
+                      <Suspense fallback={<Loading />}>
+                        <Home />
+                      </Suspense>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
+                }
+              />
+              <Route
+                path="/archive"
+                element={
+                  <>
+                    <SignedIn>
+                      <Suspense fallback={<Loading />}>
+                        <Archive />
+                      </Suspense>
+                    </SignedIn>
+                    <SignedOut>
+                      <RedirectToSignIn />
+                    </SignedOut>
+                  </>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <NotFoundPage />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </div>
       </LazyMotion>
     </ClerkProvider>
   );

@@ -3,6 +3,7 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import {
   AgendaSliceProps,
   ArchiveSliceProps,
+  DarkModeSliceProps,
   FormDataSliceProps,
   IsDoneSliceProps,
   IsOpenModalSliceProps,
@@ -14,6 +15,7 @@ import formDataSlice from "./slices/formDataSlice";
 import isDoneSlice from "./slices/isDoneSlice";
 import isOpenModalSlice from "./slices/isOpenModalSlice";
 import isUpdateSlice from "./slices/isUpdateSlice";
+import darkModeSlice from "./slices/darkModeSlice";
 
 /**
  * Slice the store into smaller stores
@@ -25,7 +27,8 @@ const useAgendaStore = create<
     FormDataSliceProps &
     IsUpdateSliceProps &
     IsDoneSliceProps &
-    IsOpenModalSliceProps
+    IsOpenModalSliceProps &
+    DarkModeSliceProps
 >()(
   devtools(
     persist(
@@ -36,6 +39,7 @@ const useAgendaStore = create<
         ...isUpdateSlice(...set),
         ...isDoneSlice(...set),
         ...isOpenModalSlice(...set),
+        ...darkModeSlice(...set),
       }),
       {
         name: "agenda",

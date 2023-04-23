@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
-
-type Theme = "light" | "dark";
-
-const browser: boolean = typeof window !== "undefined";
-const localValue = (browser ? localStorage.getItem("theme") : "light") as Theme;
-const systemTheme: Theme =
-  browser && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+import { useEffect } from "react";
+import { shallow } from "zustand/shallow";
+import { browser } from "~/lib/utils/constants";
+import useDarkModeStore from "~/store";
 
 export function useDarkMode() {
-  const [darkMode, setDarkMode] = useState<Theme>(localValue || systemTheme);
+  const { darkMode, setDarkMode } = useDarkModeStore(
+    (state) => ({
+      darkMode: state.darkMode,
+      setDarkMode: state.setDarkMode,
+    }),
+    shallow
+  );
 
   useEffect(() => {
     if (!browser) return;

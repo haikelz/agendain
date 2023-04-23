@@ -2,9 +2,10 @@ import { m } from "framer-motion";
 import { memo } from "react";
 import { IconType } from "react-icons";
 import reactStringReplace from "react-string-replace";
+import { shallow } from "zustand/shallow";
 import Button from "~/components/Button";
 import { cx } from "~/lib/helpers/cx";
-import { leftToRight } from "~/lib/utils/animations";
+import { variants } from "~/lib/utils/animations";
 import { buttonsList } from "~/lib/utils/data";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
@@ -15,9 +16,16 @@ type AgendaCardProps = {
 };
 
 export function AgendaCard({ item, search }: AgendaCardProps) {
-  console.log("dirender");
   const { agenda, setAgenda, archive, setArchive, setFormData, setIsUpdate } = useAgendaStore(
-    (state) => state
+    (state) => ({
+      agenda: state.agenda,
+      setAgenda: state.setAgenda,
+      archive: state.archive,
+      setArchive: state.setArchive,
+      setFormData: state.setFormData,
+      setIsUpdate: state.setIsUpdate,
+    }),
+    shallow
   );
 
   function handleDeleteAgenda(id: string) {
@@ -58,7 +66,7 @@ export function AgendaCard({ item, search }: AgendaCardProps) {
 
   return (
     <m.div
-      variants={leftToRight}
+      variants={variants.leftToRight}
       transition={{ duration: 0.3 }}
       initial="hidden"
       animate="visible"

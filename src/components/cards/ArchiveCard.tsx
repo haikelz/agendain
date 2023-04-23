@@ -1,9 +1,10 @@
 import { m } from "framer-motion";
 import { HiArrowPath, HiTrash } from "react-icons/hi2";
 import reactStringReplace from "react-string-replace";
+import { shallow } from "zustand/shallow";
 import Button from "~/components/Button";
 import { cx } from "~/lib/helpers/cx";
-import { leftToRight } from "~/lib/utils/animations";
+import { variants } from "~/lib/utils/animations";
 import useAgendaStore from "~/store";
 import { AgendaProps } from "~/types";
 
@@ -13,7 +14,15 @@ type AgendaCardProps = {
 };
 
 export function ArchiveCard({ item, search }: AgendaCardProps) {
-  const { agenda, archive, setArchive, setAgenda } = useAgendaStore((state) => state);
+  const { agenda, archive, setArchive, setAgenda } = useAgendaStore(
+    (state) => ({
+      agenda: state.agenda,
+      archive: state.archive,
+      setArchive: state.setArchive,
+      setAgenda: state.setAgenda,
+    }),
+    shallow
+  );
 
   function handleDeleteArchive(id: string) {
     const data = [...archive];
@@ -42,7 +51,7 @@ export function ArchiveCard({ item, search }: AgendaCardProps) {
 
   return (
     <m.div
-      variants={leftToRight}
+      variants={variants.leftToRight}
       transition={{ duration: 0.3 }}
       initial="hidden"
       animate="visible"

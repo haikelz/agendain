@@ -19,7 +19,15 @@ export default function Home() {
   const [search, setSearch] = useState<string>("");
 
   const { agenda, setAgenda, formData, setFormData, isUpdate, setIsUpdate } = useAgendaStore(
-    (state) => state
+    (state) => ({
+      agenda: state.agenda,
+      setAgenda: state.setAgenda,
+      formData: state.formData,
+      setArchive: state.setArchive,
+      setFormData: state.setFormData,
+      isUpdate: state.isUpdate,
+      setIsUpdate: state.setIsUpdate,
+    })
   );
 
   function handleChangeAgenda<T extends ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>(
@@ -68,7 +76,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="flex w-full flex-col items-center justify-center">
+      <div className="w-full">
         <div className="text-center">
           <h1 className="text-4xl font-bold">Agendain</h1>
           <p className="mt-2 font-medium">Apa agendamu hari ini?</p>

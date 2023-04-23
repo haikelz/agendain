@@ -4,7 +4,7 @@ import id from "date-fns/locale/id";
 import { m } from "framer-motion";
 import { HiXMark } from "react-icons/hi2";
 import { cx } from "~/lib/helpers/cx";
-import { popUpModal } from "~/lib/utils/animations";
+import { variants } from "~/lib/utils/animations";
 import useAgendaStore from "~/store";
 import Button from "./Button";
 
@@ -19,6 +19,7 @@ type ModalProps = {
 
 export default function Modal({ user }: ModalProps) {
   const setIsOpenModal = useAgendaStore((state) => state.setIsOpenModal);
+
   const { signOut } = useClerk();
 
   function handleSignOut() {
@@ -29,7 +30,7 @@ export default function Modal({ user }: ModalProps) {
   return (
     <m.div
       transition={{ duration: 0.2 }}
-      variants={popUpModal}
+      variants={variants.popUpModal}
       initial="hidden"
       animate="visible"
       exit="exit"
