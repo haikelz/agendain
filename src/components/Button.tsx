@@ -18,6 +18,7 @@ export default function Button({ children, variant, className, label, onClick }:
         "flex items-center justify-center space-x-2 text-white shadow-lg",
         "text-base",
         "transition-all ease-in-out",
+        "hover:-translate-y-1",
         "focus:outline-none focus:ring-4",
         variant === "primary"
           ? "bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:focus:ring-blue-800"
