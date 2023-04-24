@@ -3,7 +3,7 @@ import { AgendaSliceProps } from "~/types";
 
 const agendaSlice: StateCreator<AgendaSliceProps, [], [], AgendaSliceProps> = (set) => ({
   agenda: [],
-  setAgenda: () => set((state) => ({ agenda: state.agenda })),
+  setAgenda: (agenda) => set({ agenda: agenda }),
 });
 
 export default agendaSlice;

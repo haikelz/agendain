@@ -7,7 +7,7 @@ type KeteranganTextAreaProps = {
 };
 
 export function KeteranganTextArea({ handleChangeAgenda }: KeteranganTextAreaProps) {
-  const formData = useAgendaStore((state) => state.formData);
+  const keterangan = useAgendaStore((state) => state.formData.keterangan);
 
   return (
     <div className="flex w-full flex-col">
@@ -16,7 +16,7 @@ export function KeteranganTextArea({ handleChangeAgenda }: KeteranganTextAreaPro
         className="mt-2 h-32 text-sm"
         placeholder="Ketik disini...."
         name="keterangan"
-        value={formData.keterangan}
+        value={keterangan}
         onChange={handleChangeAgenda}
         required
       />

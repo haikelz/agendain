@@ -9,6 +9,7 @@ type BaseProps = {
   keterangan: string;
 };
 
+// agenda, archive props
 export type AgendaProps = BaseProps & {
   id: string;
   date: string;
@@ -45,6 +46,7 @@ export type IndexTargetValueProps = Record<string, string> & {
   keterangan: string;
 };
 
+// slice props
 export type IsDoneSliceProps = {
   isDone: boolean;
   setIsDone: (isDone: boolean) => void;

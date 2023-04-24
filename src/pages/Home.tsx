@@ -30,9 +30,7 @@ export default function Home() {
     })
   );
 
-  function handleChangeAgenda<T extends ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>(
-    event: T
-  ) {
+  function handleChangeAgenda(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const data: IndexTargetValueProps = { ...formData };
     data[event.target.name] = event.target.value;
 

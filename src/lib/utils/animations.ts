@@ -1,4 +1,14 @@
-export const variants = {
+import { Variants } from "framer-motion";
+
+type VariantsConfigProps = {
+  popUpModal: Variants;
+  pageTransition: Variants;
+  leftToRight: Variants;
+  toTop: Variants;
+  notMove: Variants;
+};
+
+export const variants: VariantsConfigProps = {
   popUpModal: {
     hidden: { opacity: 0, scale: 0 },
     visible: { opacity: 1, scale: 1 },

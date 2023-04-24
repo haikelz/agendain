@@ -7,7 +7,7 @@ type JudulInputProps = {
 };
 
 export function JudulInput({ handleChangeAgenda }: JudulInputProps) {
-  const formData = useAgendaStore((state) => state.formData);
+  const judul = useAgendaStore((state) => state.formData.judul);
 
   return (
     <div className="flex w-full flex-col">
@@ -17,7 +17,7 @@ export function JudulInput({ handleChangeAgenda }: JudulInputProps) {
         className="mt-2"
         placeholder="Ketik disini...."
         name="judul"
-        value={formData.judul}
+        value={judul}
         onChange={handleChangeAgenda}
         required
       />

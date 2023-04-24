@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { shallow } from "zustand/shallow";
 import { browser } from "~/lib/utils/constants";
-import useDarkModeStore from "~/store";
+import useAgendaStore from "~/store";
 
 export function useDarkMode() {
-  const { darkMode, setDarkMode } = useDarkModeStore(
+  const { darkMode, setDarkMode } = useAgendaStore(
     (state) => ({
       darkMode: state.darkMode,
       setDarkMode: state.setDarkMode,

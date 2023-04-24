@@ -11,11 +11,11 @@ import {
 } from "~/types";
 import agendaSlice from "./slices/agendaSlice";
 import archiveSlice from "./slices/archiveSlice";
+import darkModeSlice from "./slices/darkModeSlice";
 import formDataSlice from "./slices/formDataSlice";
 import isDoneSlice from "./slices/isDoneSlice";
 import isOpenModalSlice from "./slices/isOpenModalSlice";
 import isUpdateSlice from "./slices/isUpdateSlice";
-import darkModeSlice from "./slices/darkModeSlice";
 
 /**
  * Slice the store into smaller stores

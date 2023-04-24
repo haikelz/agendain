@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { memo } from "react";
 import { HiArrowPath, HiTrash } from "react-icons/hi2";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
@@ -111,3 +112,5 @@ export function ArchiveCard({ item, search }: AgendaCardProps) {
     </m.div>
   );
 }
+
+memo(ArchiveCard);

@@ -3,7 +3,7 @@ import { Tooltip } from "flowbite-react";
 import { AnimatePresence, m } from "framer-motion";
 import { useState } from "react";
 import { HiMoon, HiSun } from "react-icons/hi2";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { shallow } from "zustand/shallow";
 import { useDarkMode } from "~/hooks";
 import { cx } from "~/lib/helpers/cx";
@@ -16,6 +16,7 @@ export default function Layout({ children }: ChildrenProps) {
   const [darkMode, setDarkMode] = useDarkMode();
   const [isOnClick, setIsOnClick] = useState<boolean>(false);
 
+  const { notMove, pageTransition, toTop } = variants;
   const { isLoaded, isSignedIn, user } = useUser();
   const { isOpenModal, setIsOpenModal } = useAgendaStore(
     (state) => ({
@@ -24,10 +25,6 @@ export default function Layout({ children }: ChildrenProps) {
     }),
     shallow
   );
-
-  const { notMove, pageTransition, toTop } = variants;
-
-  const location = useLocation();
 
   if (!isLoaded || !isSignedIn) {
     return null;
@@ -93,20 +90,15 @@ export default function Layout({ children }: ChildrenProps) {
               </div>
             </div>
           </nav>
-
-          <AnimatePresence mode="wait">
-            <m.main
-              key={location.pathname}
-              variants={pageTransition}
-              transition={{ duration: 0.3 }}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="my-4 flex w-full items-center justify-center"
-            >
-              {children}
-            </m.main>
-          </AnimatePresence>
+          <m.main
+            variants={pageTransition}
+            transition={{ duration: 0.3 }}
+            initial="hidden"
+            animate="visible"
+            className="my-4 flex w-full items-center justify-center"
+          >
+            {children}
+          </m.main>
         </div>
       </div>
       <AnimatePresence mode="wait">{isOpenModal ? <Modal user={user} /> : null}</AnimatePresence>
