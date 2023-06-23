@@ -1,10 +1,10 @@
+import { cx } from "class-variance-authority";
 import { m } from "framer-motion";
 import { memo } from "react";
 import { IconType } from "react-icons";
 import reactStringReplace from "react-string-replace";
 import { shallow } from "zustand/shallow";
-import Button from "~/components/Button";
-import { cx } from "~/lib/helpers/cx";
+import { Button, CheckBox, Heading, Paragraph } from "~/components/atoms";
 import { variants } from "~/lib/utils/animations";
 import { buttonsList } from "~/lib/utils/data";
 import useAgendaStore from "~/store";
@@ -49,11 +49,9 @@ export function AgendaCard({ item, search }: AgendaCardProps) {
   function handleArchiveAgenda(id: string) {
     const agendaData = [...agenda];
     const archiveData = [...archive];
-
-    handleDeleteAgenda(id);
-
     const foundAgenda = agendaData.find((item) => item.id === id);
 
+    handleDeleteAgenda(id);
     archiveData.push({
       id: foundAgenda?.id as string,
       judul: foundAgenda?.judul as string,
@@ -79,16 +77,8 @@ export function AgendaCard({ item, search }: AgendaCardProps) {
       <div className="flex w-full items-center justify-end space-x-2">
         <span className="font-semibold">{item.date}</span>
         <div className="flex items-center">
-          <input
+          <CheckBox
             name={item.judul}
-            type="checkbox"
-            className={cx(
-              "h-4 w-4 cursor-pointer rounded",
-              "border-gray-300 bg-gray-100 text-blue-700",
-              "focus:ring-2 focus:ring-blue-600",
-              "dark:border-gray-600 dark:bg-gray-700",
-              "dark:ring-offset-gray-800 dark:focus:ring-blue-700"
-            )}
             onChange={(event) =>
               setAgenda(
                 agenda.map((item) =>
@@ -103,25 +93,30 @@ export function AgendaCard({ item, search }: AgendaCardProps) {
         </div>
       </div>
       <div className="mt-2">
-        <h3 className={cx("text-2xl font-bold", item.isDone ? "line-through" : "")}>
+        <Heading as="h3" align="start" size="2xl" className={item.isDone ? "line-through" : ""}>
           {reactStringReplace(item.judul, search, (match: string, index: number) => (
             <span className="bg-yellow-300" key={index + 1}>
               {match}
             </span>
           ))}
-        </h3>
-        <p className={cx("my-3 font-medium", item.isDone ? "line-through" : "")}>
+        </Heading>
+        <Paragraph className={cx("my-3", item.isDone ? "line-through" : "")}>
           {item.keterangan}
-        </p>
+        </Paragraph>
         <div className="flex items-center justify-start space-x-4">
           {buttonsList.map((button) => {
             const Icon: IconType = button.icon;
             return (
               <Button
+                intent={
+                  button.label === "delete"
+                    ? "danger"
+                    : button.label === "edit"
+                    ? "secondary"
+                    : "primary"
+                }
                 key={button.id}
-                variant={button.variant}
                 label={button.label}
-                className="flex items-center space-x-2 px-3 py-2"
                 onClick={() =>
                   button.label === "delete"
                     ? handleDeleteAgenda(item.id)

@@ -1,17 +1,15 @@
+import { cx } from "class-variance-authority";
 import format from "date-fns/format";
 import id from "date-fns/locale/id";
 import { AnimatePresence } from "framer-motion";
 import { nanoid } from "nanoid";
 import { ChangeEvent, FormEvent, useMemo, useState } from "react";
 import { HiArrowPath, HiArrowTopRightOnSquare, HiPlus } from "react-icons/hi2";
-import { Link } from "react-router-dom";
-import Button from "~/components/Button";
+import { Link } from "wouter";
 import Layout from "~/components/Layout";
-import TidakAda from "~/components/TidakAda";
-import { AgendaCard } from "~/components/cards";
-import { JudulInput, SearchInput } from "~/components/inputs";
-import { KeteranganTextArea } from "~/components/textArea";
-import { cx } from "~/lib/helpers/cx";
+import { Button, Heading, Paragraph } from "~/components/atoms";
+import { AgendaCard, JudulInput, KeteranganTextArea, SearchInput } from "~/components/molecules";
+import { TidakAda } from "~/components/molecules/TidakAda";
 import useAgendaStore from "~/store";
 import { IndexTargetValueProps } from "~/types";
 
@@ -76,25 +74,17 @@ export default function Home() {
     <Layout>
       <div className="w-full">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Agendain</h1>
-          <p className="mt-2 font-medium">Apa agendamu hari ini?</p>
+          <Heading as="h1" size="4xl">
+            Agendain
+          </Heading>
+          <Paragraph className="mt-2">Apa agendamu hari ini?</Paragraph>
         </div>
         <form className="my-6 w-full" onSubmit={handleSubmit}>
           <div className="flex flex-col items-center justify-center gap-4">
             <JudulInput handleChangeAgenda={handleChangeAgenda} />
             <KeteranganTextArea handleChangeAgenda={handleChangeAgenda} />
             <div className="flex items-center justify-center space-x-3">
-              <button
-                type="submit"
-                aria-label="submit"
-                className={cx(
-                  "flex items-center space-x-2 px-3 py-2",
-                  "rounded-md bg-blue-600 text-white transition-all ease-in-out",
-                  "hover:-translate-y-1 hover:bg-blue-700",
-                  "focus:outline-none focus:ring-4 focus:ring-blue-300",
-                  "dark:focus:ring-blue-800"
-                )}
-              >
+              <Button type="submit" intent="primary" label="submit">
                 {isUpdate.status ? (
                   <>
                     <span>Update</span>
@@ -106,13 +96,9 @@ export default function Home() {
                     <HiPlus size={22} />
                   </>
                 )}
-              </button>
+              </Button>
               <Link to="/archive">
-                <Button
-                  variant="secondary"
-                  label="Go to Archive"
-                  className={cx("flex items-center space-x-2 px-3 py-2")}
-                >
+                <Button intent="secondary" label="Go to Archive">
                   <span>Go to Archive</span>
                   <HiArrowTopRightOnSquare />
                 </Button>
@@ -127,7 +113,9 @@ export default function Home() {
             filteredAgenda.length ? "" : "items-center"
           )}
         >
-          <h2 className="my-6 text-center text-3xl font-bold">List Agenda</h2>
+          <Heading as="h2" align="center" size="3xl" className="my-6">
+            List Agenda
+          </Heading>
           {filteredAgenda.length ? (
             <div className={cx("grid grid-cols-1 grid-rows-1 gap-4")}>
               <AnimatePresence mode="sync">

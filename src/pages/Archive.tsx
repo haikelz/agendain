@@ -1,9 +1,9 @@
+import { cx } from "class-variance-authority";
 import { useEffect, useMemo, useState } from "react";
 import Layout from "~/components/Layout";
-import TidakAda from "~/components/TidakAda";
-import { ArchiveCard } from "~/components/cards";
-import { SearchInput } from "~/components/inputs";
-import { cx } from "~/lib/helpers/cx";
+import { Heading, Paragraph } from "~/components/atoms";
+import { ArchiveCard, SearchInput } from "~/components/molecules";
+import { TidakAda } from "~/components/molecules/TidakAda";
 import useAgendaStore from "~/store";
 
 export default function Archive() {
@@ -28,12 +28,18 @@ export default function Archive() {
     <Layout>
       <div className="w-full">
         <section className="flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl font-bold">Archive</h1>
-          <p className="my-4 mt-1 font-medium">Cari agenda yang telah kamu archivekan disini!</p>
+          <Heading as="h1" size="4xl">
+            Archive
+          </Heading>
+          <Paragraph className="my-4 mt-1">
+            Cari agenda yang telah kamu archivekan disini!
+          </Paragraph>
           <SearchInput search={search} setSearch={setSearch} />
         </section>
         <section className="mt-6 w-full">
-          <h2 className="my-6 text-center text-3xl font-bold">List Archive</h2>
+          <Heading align="center" as="h2" size="3xl" className="my-6">
+            List Archive
+          </Heading>
           {filteredArchive.length ? (
             <div className={cx("mt-6 grid grid-cols-1 grid-rows-1 gap-4")}>
               {filteredArchive.map((item) => (

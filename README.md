@@ -3,10 +3,6 @@
   <p>Manage your agenda with Agendain!</p>
 </div>
 
-## Note
-
-Still under construction!
-
 ## Tech Stack
 
 - React JS

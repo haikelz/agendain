@@ -1,12 +1,12 @@
 import { useClerk, useUser } from "@clerk/clerk-react";
+import { cx } from "class-variance-authority";
 import { format } from "date-fns";
 import id from "date-fns/locale/id";
 import { m } from "framer-motion";
 import { HiXMark } from "react-icons/hi2";
-import { cx } from "~/lib/helpers/cx";
+import { Button, Heading, Image } from "~/components/atoms";
 import { variants } from "~/lib/utils/animations";
 import useAgendaStore from "~/store";
-import Button from "./Button";
 
 /**
  * If we hover user type, we will get `UserResource` type.
@@ -17,7 +17,7 @@ type ModalProps = {
   user: NonNullable<ReturnType<typeof useUser>["user"]>;
 };
 
-export default function Modal({ user }: ModalProps) {
+export function Modal({ user }: ModalProps) {
   const setIsOpenModal = useAgendaStore((state) => state.setIsOpenModal);
 
   const { signOut } = useClerk();
@@ -50,9 +50,9 @@ export default function Modal({ user }: ModalProps) {
               "dark:border-gray-600"
             )}
           >
-            <h3 className={cx("text-xl font-semibold text-gray-900", "dark:text-white")}>
+            <Heading as="h3" size="xl" className="font-semibold">
               User Data
-            </h3>
+            </Heading>
             <button
               type="button"
               className={cx(
@@ -70,16 +70,16 @@ export default function Modal({ user }: ModalProps) {
             </button>
           </div>
           <div className="my-4 flex w-full items-center justify-center">
-            <img
+            <Image
               className="h-60 w-60 rounded-full border-[3px] border-blue-600"
               src={user.profileImageUrl}
               alt="user profile"
-              loading="lazy"
-              decoding="async"
             />
           </div>
           <div className="my-3 flex flex-col items-center justify-center">
-            <h4 className="text-2xl">{user.fullName}</h4>
+            <Heading as="h4" size="2xl">
+              {user.fullName}
+            </Heading>
             <div className="mt-1 flex flex-col items-center justify-center">
               <span>
                 <span className="font-bold">Email: </span> {user.primaryEmailAddress?.emailAddress}
@@ -100,12 +100,7 @@ export default function Modal({ user }: ModalProps) {
               "dark:border-gray-600"
             )}
           >
-            <Button
-              className="flex items-center space-x-2 px-3 py-2"
-              variant="primary"
-              label="sign out"
-              onClick={handleSignOut}
-            >
+            <Button intent="primary" label="sign out" onClick={handleSignOut}>
               Sign Out
             </Button>
           </div>

@@ -1,6 +1,6 @@
+import { cx } from "class-variance-authority";
 import { SetStateAction } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import { cx } from "~/lib/helpers/cx";
 
 type SearchInputProps = {
   search: string;
@@ -13,14 +13,13 @@ export function SearchInput({ search, setSearch }: SearchInputProps) {
       <input
         type="search"
         className={cx(
-          "relative w-full rounded-lg",
+          "block w-full rounded-lg",
           "border border-gray-300 bg-gray-50",
-          "p-2.5 pl-12",
-          "text-sm text-gray-900",
-          "focus:border-blue-500 focus:ring-blue-500",
+          "p-2.5 pl-12 text-sm text-gray-900",
+          "focus:border-cyan-500 focus:ring-cyan-500",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          "dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400",
-          "dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          "dark:border-gray-600 dark:bg-gray-700 dark:text-white",
+          "dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500"
         )}
         placeholder="Cari...."
         value={search}

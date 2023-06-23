@@ -1,16 +1,17 @@
 import { useUser } from "@clerk/clerk-react";
+import { cx } from "class-variance-authority";
 import { Tooltip } from "flowbite-react";
 import { AnimatePresence, m } from "framer-motion";
 import { useState } from "react";
 import { HiMoon, HiSun } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import { shallow } from "zustand/shallow";
 import { useDarkMode } from "~/hooks";
-import { cx } from "~/lib/helpers/cx";
 import { variants } from "~/lib/utils/animations";
 import useAgendaStore from "~/store";
 import { ChildrenProps } from "~/types";
-import Modal from "./Modal";
+import { Image } from "./atoms";
+import { Modal } from "./organisms";
 
 export default function Layout({ children }: ChildrenProps) {
   const [darkMode, setDarkMode] = useDarkMode();
@@ -43,7 +44,7 @@ export default function Layout({ children }: ChildrenProps) {
             <div className="flex items-center justify-between">
               <Link to="/">
                 <div className="flex items-center justify-center">
-                  <img className="h-8 w-8" src="/logo.svg" alt="logo" />
+                  <Image className="h-8 w-8" src="/logo.svg" alt="logo" />
                 </div>
               </Link>
               <div className="flex items-center justify-center space-x-3">
@@ -75,7 +76,7 @@ export default function Layout({ children }: ChildrenProps) {
                   aria-label="open modal"
                   onClick={() => setIsOpenModal(!isOpenModal)}
                 >
-                  <img
+                  <Image
                     className={cx(
                       "h-8 w-8",
                       "cursor-pointer rounded-full",

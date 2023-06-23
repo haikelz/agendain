@@ -1,13 +1,13 @@
-import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
-import TidakAda from "~/components/TidakAda";
+import { Link } from "wouter";
+import { Button } from "~/components/atoms";
+import { TidakAda } from "~/components/molecules/TidakAda";
 
 export default function NotFoundPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center text-center">
       <TidakAda description="404 Not Found!" />
       <Link to="/">
-        <Button className="mt-3" type="button" aria-label="back to home">
+        <Button intent="primary" className="mt-3" label="back to home">
           Back to Home
         </Button>
       </Link>

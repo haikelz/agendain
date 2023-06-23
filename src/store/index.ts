@@ -43,7 +43,7 @@ const useAgendaStore = create<
       }),
       {
         name: "agenda",
-        storage: createJSONStorage(() => sessionStorage),
+        storage: createJSONStorage(() => localStorage),
       }
     )
   )
