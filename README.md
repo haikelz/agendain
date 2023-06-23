@@ -6,10 +6,11 @@
 ## Tech Stack
 
 - React JS
-- Tailwind CSS with Flowbite as UI components
 - Vite
 - Typescript
+- Tailwind CSS with Flowbite as UI components
 - Clerk for managing Authentication
+- Wouter for routing
 - Zustand
 
 ## Screenshots
