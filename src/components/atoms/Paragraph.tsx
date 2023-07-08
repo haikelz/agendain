@@ -17,10 +17,15 @@ const paragraph = cva("text-base text-gray-900 dark:text-white", {
 
 type ParagraphProps = HTMLAttributes<HTMLParagraphElement> & VariantProps<typeof paragraph>;
 
-export function Paragraph({ className, weight, children, ...props }: ParagraphProps) {
+export function Paragraph({
+  className,
+  weight,
+  children,
+  ...props
+}: ParagraphProps) {
   return (
     <p className={paragraph({ weight, className })} {...props}>
       {children}
     </p>
   );
-}
+};

@@ -21,4 +21,4 @@ type CheckBoxProps = InputHTMLAttributes<HTMLInputElement> & VariantProps<typeof
 
 export function CheckBox({ intent, className, ...props }: CheckBoxProps) {
   return <input type="checkbox" className={checkbox({ intent, className })} {...props} />;
-}
+};

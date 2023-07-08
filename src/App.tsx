@@ -1,21 +1,23 @@
 import { ClerkProvider, RedirectToSignIn, SignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { LazyMotion, domAnimation } from "framer-motion";
 import { Suspense, lazy } from "react";
-import { clerkPubKey } from "./lib/utils/constants";
-import Loading from "./pages/Loading";
 import { Route, Switch } from "wouter";
+import { env } from "~/env";
+import Loading from "./pages/Loading";
 
 const Home = lazy(() => import("./pages/Home"));
 const NotFoundPage = lazy(() => import("./pages/404"));
 const Archive = lazy(() => import("./pages/Archive"));
 
-if (!clerkPubKey) {
+const { VITE_CLERK_PUBLISHABLE_KEY } = env;
+
+if (!VITE_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key!");
 }
 
 export default function App() {
   return (
-    <ClerkProvider publishableKey={clerkPubKey}>
+    <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
       <LazyMotion features={domAnimation}>
         <div className="dark:bg-gray-900 dark:text-gray-200">
           <Switch>
